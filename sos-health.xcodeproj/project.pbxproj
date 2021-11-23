@@ -281,14 +281,14 @@
 			path = System;
 			sourceTree = "<group>";
 		};
-		C44F5CA127406D9E00FDFA17 /* Domain  */ = {
+		C44F5CA127406D9E00FDFA17 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
 				C44F5CA227406DAC00FDFA17 /* Model */,
 				C44F5CA327406DB700FDFA17 /* Repository */,
 				C44F5CA427406DC500FDFA17 /* UseCase */,
 			);
-			path = "Domain ";
+			path = Domain;
 			sourceTree = "<group>";
 		};
 		C44F5CA227406DAC00FDFA17 /* Model */ = {
@@ -502,7 +502,7 @@
 			children = (
 				C44F5CA627406E2000FDFA17 /* Core */,
 				C44F5CA527406E1A00FDFA17 /* Data */,
-				C44F5CA127406D9E00FDFA17 /* Domain  */,
+				C44F5CA127406D9E00FDFA17 /* Domain */,
 				C4FC71BE273C058400EA9D76 /* Presentation */,
 			);
 			path = "sos-health";
