@@ -1,0 +1,51 @@
+/*
+   Localizable.strings
+   sos-health
+
+   Created by João Vitor Duarte Mariucio on 10/11/21.
+
+ */
+
+// MARK: - Welcome
+app_name = "SOS Health";
+button_create_account = "Criar conta";
+button_login = "Login";
+welcome_title = "Bem vindo";
+welcome_description = "A melhor plataforma de solicitação de emergência pessoal para todas as idades e indivíduos, estamos aqui para chamar socorro assim que precisar.\n\nCrie sua conta gratuitamente";
+welcome_option = "Ou use alguma rede social";
+
+// MARK: - Login
+login_description = "É um prazer tê lo aqui novamente, seja bem vindo. ;)";
+text_field_email = "E-mail";
+text_field_email_place_holder = "exemplo@sos.com";
+text_field_password = "Senha";
+text_field_password_place_holder = "Digite aqui sua senha";
+button_forgot_password = "Esqueceu sua senha?";
+
+// MARK: - Onboard
+your_description = "Seu";
+confirm_description = "Confirmação";
+address_description = "endereço";
+set_a_description = "Defina uma";
+repeat_your_description = "Repeat your";
+text_field_name = "nome completo";
+text_field_zip_code = "CEP";
+text_field_phone = "telefone";
+text_field_streat = "Rua";
+text_field_complement = "Complemento";
+text_field_number = "Número";
+text_field_city = "Cidade";
+text_field_state = "Estado";
+text_field_password = "senha";
+text_field_date_birth = "data de nascimento";
+text_field_name_place_holder = "João Manoel da Silva";
+text_field_zip_code_place_holder = "17400-000";
+text_field_phone_place_holder = "(14) 99151-9185";
+text_field_streat_place_holder = "Joaquim Marques";
+text_field_complement_place_holder = "Portão preto";
+text_field_number_place_holder = "259";
+text_field_city_place_holder = "Garça";
+text_field_state_place_holder = "SP";
+text_field_password_place_holder = "Sua senha";
+text_field_date_birth_place_holder = "04/05/2000";
+button_next = "Avançar";

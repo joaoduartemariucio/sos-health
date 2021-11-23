@@ -1,0 +1,111 @@
+//
+//  WelcomeView.swift
+//  sos-health
+//
+//  Created by João Vitor Duarte Mariucio on 10/11/21.
+//
+
+import AlertToast
+import Combine
+import SwiftUI
+
+struct WelcomeView: View {
+
+    @EnvironmentObject private var coordinator: UnauthenticatedCoordinator.Router
+    @ObservedObject var viewModel: ViewModel
+    @State var cancellable: AnyCancellable?
+    @State var loading = false
+    @State var sessionProcessingQueue = DispatchQueue(label: "SessionProcessingQueue")
+
+    func handleViewModel(from state: ViewModel.State) {
+        switch state {
+        case let .loading(isLoading):
+            loading = isLoading
+        case .success:
+//            coordinator.root(\.)
+            break
+        case let .error(error):
+            print(error)
+        case .newUser(let user), .onboardNotCompleted(let user):
+            coordinator.route(to: \.onboarding, user)
+        default:
+            break
+        }
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("welcome_title")
+                .foregroundColor(Color.accentColor)
+                .font(.body)
+            Text("app_name")
+                .foregroundColor(Color.accentColor)
+                .font(.title)
+                .bold()
+            Text("welcome_description")
+                .foregroundColor(Color("WelcomeDescription"))
+                .font(.subheadline)
+            Spacer().frame(maxHeight: 46)
+            HStack(spacing: 20) {
+                RoundedRectangleButton(
+                    title: "button_create_account",
+                    backgroundColor: Color.accentColor.opacity(0.10),
+                    foregroundColor: Color.accentColor,
+                    action: {
+                        let user = User(uid: nil, onboardCompleted: false)
+                        coordinator.route(to: \.onboarding, user)
+                    }
+                )
+                RoundedRectangleButton(
+                    title: "button_login",
+                    backgroundColor: Color.accentColor,
+                    action: {
+                        coordinator.route(to: \.login)
+                    }
+                )
+            }
+            Spacer().frame(maxHeight: 36)
+            Text("welcome_option")
+                .frame(maxWidth: .infinity, alignment: .center)
+                .foregroundColor(Color.accentColor)
+                .font(.subheadline)
+            Spacer().frame(maxHeight: 36)
+            HStack(alignment: .center, spacing: 25) {
+                Button(action: { print("button pressed") }) {
+                    Image("facebook")
+                        .resizable()
+                        .renderingMode(.template)
+                        .colorMultiply(.accentColor)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                Button(action: {
+                    viewModel.loginWithGoogle()
+                }) {
+                    Image("google")
+                        .resizable()
+                        .renderingMode(.template)
+                        .colorMultiply(.accentColor)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }.frame(minHeight: 0, maxHeight: 50)
+        }
+        .toast(isPresenting: $loading, tapToDismiss: false) {
+            AlertToast(type: .loading, title: "Loading...")
+        }.onAppear {
+            cancellable = viewModel.$state
+                .subscribe(on: sessionProcessingQueue)
+                .receive(on: DispatchQueue.main)
+                .sink { state in
+                    self.handleViewModel(from: state)
+                }
+        }.onDisappear {
+            self.cancellable?.cancel()
+        }
+        .disabled(loading)
+        .padding(28)
+    }
+}

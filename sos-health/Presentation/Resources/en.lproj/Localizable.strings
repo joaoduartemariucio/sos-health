@@ -1,0 +1,51 @@
+/*
+   Localizable.strings
+   sos-health
+
+   Created by João Vitor Duarte Mariucio on 10/11/21.
+
+ */
+
+// MARK: - Welcome
+app_name = "SOS Health";
+button_create_account = "Create account";
+button_login = "Login";
+welcome_title = "Welcome";
+welcome_description = "The best personal emergency request platform for all ages and individuals, we are here to call for help as soon as you need it.\n\nCreate your account for free";
+welcome_option = "Or use some social media";
+
+// MARK: - Login
+login_description = "It's a pleasure to have you here again, welcome. ;)";
+text_field_email = "Email";
+text_field_email_place_holder = "exemplo@sos.com";
+text_field_password = "Password";
+text_field_password_place_holder = "Enter your password here";
+button_forgot_password = "Forgot your password?";
+
+// MARK: - Onboard
+your_description = "Your";
+confirm_description = "Confirmation";
+address_description = "address";
+set_a_description = "Set a";
+repeat_your_description = "Repeat your";
+text_field_name = "full name";
+text_field_zip_code = "zip code";
+text_field_phone = "phone number";
+text_field_streat = "Streat";
+text_field_complement = "Complement";
+text_field_number = "Number";
+text_field_city = "City";
+text_field_state = "State";
+text_field_password = "password";
+text_field_date_birth = "date of birth";
+text_field_name_place_holder = "João Manoel da Silva";
+text_field_zip_code_place_holder = "17400-000";
+text_field_phone_place_holder = "(14) 99151-9185";
+text_field_streat_place_holder = "Joaquim Marques";
+text_field_complement_place_holder = "Portão preto";
+text_field_number_place_holder = "259";
+text_field_city_place_holder = "Garça";
+text_field_state_place_holder = "SP";
+text_field_password_place_holder = "Your password";
+text_field_date_birth_place_holder = "04/05/2000";
+button_next = "Next";
