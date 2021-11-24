@@ -31,18 +31,11 @@ struct HomeView: View {
                         .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
                     ScrollView(.horizontal) {
                         LazyHGrid(rows: rows, alignment: .center) {
-                            ForEach(1 ... 50, id: \.self) { item in
-                                Text("\(item)")
-                                    .font(.largeTitle)
-                                    .frame(minWidth: 180, maxHeight: .infinity)
-                                    .foregroundColor(.white)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(.orange)
-                                    )
+                            ForEach(1 ... 10, id: \.self) { item in
+                                ContactCardView(name: "name \(item)", phoneNumber: "phone \(item)")
                             }
                         }
-                        .frame(height: 110)
+                        .frame(height: 120)
                         .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 0))
                     }
                     Text("Solicitações de emergência")

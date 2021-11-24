@@ -45,6 +45,8 @@
 		C44F5CF727421A7900FDFA17 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CF627421A7900FDFA17 /* MainCoordinator.swift */; };
 		C44F5CFB2742243800FDFA17 /* Stinsen in Frameworks */ = {isa = PBXBuildFile; productRef = C44F5CFA2742243800FDFA17 /* Stinsen */; };
 		C44F5CFF2742259500FDFA17 /* UnauthenticatedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CFE2742259500FDFA17 /* UnauthenticatedCoordinator.swift */; };
+		C4B39DAF274D350B00FFCED7 /* ContactCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B39DAE274D350B00FFCED7 /* ContactCardView.swift */; };
+		C4B39DB1274D3B0D00FFCED7 /* EmergencyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B39DB0274D3B0C00FFCED7 /* EmergencyCardView.swift */; };
 		C4B41F73274750CA00429A45 /* FormattedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B41F72274750CA00429A45 /* FormattedTextField.swift */; };
 		C4B41F752747E1B600429A45 /* SecureInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B41F742747E1B600429A45 /* SecureInputView.swift */; };
 		C4B41F782747E2D900429A45 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B41F772747E2D900429A45 /* String+Extensions.swift */; };
@@ -139,6 +141,8 @@
 		C44F5CEE2741E2ED00FDFA17 /* HomeView.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.ViewModel.swift; sourceTree = "<group>"; };
 		C44F5CF627421A7900FDFA17 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		C44F5CFE2742259500FDFA17 /* UnauthenticatedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthenticatedCoordinator.swift; sourceTree = "<group>"; };
+		C4B39DAE274D350B00FFCED7 /* ContactCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCardView.swift; sourceTree = "<group>"; };
+		C4B39DB0274D3B0C00FFCED7 /* EmergencyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyCardView.swift; sourceTree = "<group>"; };
 		C4B41F72274750CA00429A45 /* FormattedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedTextField.swift; sourceTree = "<group>"; };
 		C4B41F742747E1B600429A45 /* SecureInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureInputView.swift; sourceTree = "<group>"; };
 		C4B41F772747E2D900429A45 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -239,8 +243,10 @@
 		C44F5C9B2740441700FDFA17 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				C44F5C9C2740444200FDFA17 /* RoundedRectangleButton.swift */,
+				C4B39DAE274D350B00FFCED7 /* ContactCardView.swift */,
+				C4B39DB0274D3B0C00FFCED7 /* EmergencyCardView.swift */,
 				C4B41F72274750CA00429A45 /* FormattedTextField.swift */,
+				C44F5C9C2740444200FDFA17 /* RoundedRectangleButton.swift */,
 				C4B41F742747E1B600429A45 /* SecureInputView.swift */,
 				C4DC275D274C1CF5007D7EB1 /* SampleItemView.swift */,
 			);
@@ -397,6 +403,7 @@
 				C4DC2760274C2B56007D7EB1 /* CreateContact */,
 				C4013F772749A71C00454AE7 /* Profile */,
 				C44F5CD42741AB9D00FDFA17 /* Home */,
+				C4FC71C2273C05AA00EA9D76 /* Login */,
 				C44F5C9E27406A8700FDFA17 /* Onboard */,
 				C4FC71C1273C05A100EA9D76 /* Welcome */,
 			);
@@ -421,7 +428,6 @@
 			children = (
 				C44F5CD52741BABF00FDFA17 /* HomeView.swift */,
 				C44F5CEE2741E2ED00FDFA17 /* HomeView.ViewModel.swift */,
-				C4FC71C2273C05AA00EA9D76 /* Login */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -430,7 +436,6 @@
 			isa = PBXGroup;
 			children = (
 				C4013F7427498F6A00454AE7 /* Authenticated */,
-				C4097028274233B0001789F8 /* Onboarding */,
 				C44F5CFD2742257B00FDFA17 /* Unauthenticated */,
 				C44F5CFC2742256C00FDFA17 /* Main */,
 			);
@@ -448,6 +453,7 @@
 		C44F5CFD2742257B00FDFA17 /* Unauthenticated */ = {
 			isa = PBXGroup;
 			children = (
+				C4097028274233B0001789F8 /* Onboarding */,
 				C44F5CFE2742259500FDFA17 /* UnauthenticatedCoordinator.swift */,
 			);
 			path = Unauthenticated;
@@ -764,8 +770,10 @@
 				C44F5CBF274074E000FDFA17 /* LoginRepositoryImpl.swift in Sources */,
 				C4F8C3942742F9F500135EC4 /* AddressDBEntity.swift in Sources */,
 				C44F5CC1274079A600FDFA17 /* LoginView.swift in Sources */,
+				C4B39DAF274D350B00FFCED7 /* ContactCardView.swift in Sources */,
 				C4B41F73274750CA00429A45 /* FormattedTextField.swift in Sources */,
 				C44F5CF727421A7900FDFA17 /* MainCoordinator.swift in Sources */,
+				C4B39DB1274D3B0D00FFCED7 /* EmergencyCardView.swift in Sources */,
 				C44F5CBB274072FA00FDFA17 /* LoginAPIImpl.swift in Sources */,
 				C44F5CB127406FD800FDFA17 /* LoginRepository.swift in Sources */,
 				C44F5CAF27406FC400FDFA17 /* Credentials.swift in Sources */,
