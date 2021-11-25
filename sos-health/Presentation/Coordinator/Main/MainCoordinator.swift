@@ -4,6 +4,7 @@
 //
 //  Created by João Vitor Duarte Mariucio on 15/11/21.
 //
+import Combine
 import Foundation
 import Stinsen
 import SwiftUI
@@ -14,29 +15,33 @@ final class MainCoordinator: NavigationCoordinatable {
     @Root var unauthenticated = makeUnauthenticated
     @Root var authenticated = makeAuthenticated
 
-    @ViewBuilder func sharedView(_ view: AnyView) -> some View {
-        view
-            .onReceive(AuthenticationService.shared.$status, perform: { status in
-                switch status {
-                case let .authenticated(user):
-                    self.root(\.authenticated)
-                case .none, .unauthenticated:
-                    self.root(\.unauthenticated)
-                }
-            })
-    }
-
-    deinit {
-        print("Deinit MainCoordinator")
-    }
+    @State var cancellable: AnyCancellable?
+    @State var quee = DispatchQueue(label: "MainCoordinatorQueue")
 
     init() {
         switch AuthenticationService.shared.status {
-        case let .authenticated(user):
+        case .authenticated:
             stack = NavigationStack(initial: \MainCoordinator.authenticated)
-        case .none, .unauthenticated:
+        case .unauthenticated:
             stack = NavigationStack(initial: \MainCoordinator.unauthenticated)
         }
+
+        cancellable = AuthenticationService.shared.$status
+            .subscribe(on: quee)
+            .receive(on: DispatchQueue.main)
+            .sink { state in
+                switch state {
+                case .authenticated:
+                    self.root(\.authenticated)
+                case .unauthenticated:
+                    self.root(\.unauthenticated)
+                }
+            }
+    }
+
+    deinit {
+        cancellable?.cancel()
+        print("Deinit MainCoordinator")
     }
 }
 
@@ -45,7 +50,7 @@ extension MainCoordinator {
         return NavigationViewCoordinator(UnauthenticatedCoordinator())
     }
 
-    func makeAuthenticated(user: User) -> AuthenticatedCoordinator {
+    func makeAuthenticated() -> AuthenticatedCoordinator {
         return AuthenticatedCoordinator()
     }
 }

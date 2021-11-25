@@ -67,24 +67,3 @@ struct LoginDBImpl: LoginDataSource {
         return true
     }
 }
-
-extension Dictionary {
-
-    func decode<T: Decodable>() throws -> T {
-        let data = try JSONSerialization.data(withJSONObject: self)
-
-        let decoder = JSONDecoder()
-
-        return try decoder.decode(T.self, from: data)
-    }
-}
-
-extension Encodable {
-    func asDictionary() throws -> [String: Any] {
-        let data = try JSONEncoder().encode(self)
-        guard let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
-            throw NSError()
-        }
-        return dictionary
-    }
-}

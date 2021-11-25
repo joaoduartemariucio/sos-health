@@ -18,6 +18,7 @@ struct StepConfirmPasswordView: View {
     @State var cancellable: AnyCancellable?
     @State var loading = false
     @State var toastError = false
+    @State var toastSuccess = false
     @State var sessionProcessingQueue = DispatchQueue(label: "SessionProcessingQueue")
 
     func handleViewModel(from state: ViewModel.State) {
@@ -33,8 +34,7 @@ struct StepConfirmPasswordView: View {
         case .error:
             toastError = true
         case .success:
-            // TODO: Manda o fdp para a tela home
-            break
+            toastSuccess = true
         default:
             break
         }
@@ -87,9 +87,13 @@ struct StepConfirmPasswordView: View {
             }.onDisappear {
                 self.cancellable?.cancel()
             }
-            .toast(isPresenting: $loading, tapToDismiss: false) {
-                AlertToast(type: .loading, title: "Loading...")
-            }
+            .toast(
+                isPresenting: $loading,
+                tapToDismiss: false,
+                alert: {
+                    AlertToast(type: .loading, title: "Loading...")
+                }
+            )
             .toast(
                 isPresenting: $toastError,
                 duration: 5,
@@ -102,6 +106,21 @@ struct StepConfirmPasswordView: View {
                     )
                 }, completion: {
                     coordinator.dismissCoordinator()
+                }
+            )
+            .toast(
+                isPresenting: $toastSuccess,
+                duration: 5,
+                tapToDismiss: false,
+                alert: {
+                    AlertToast(
+                        type: .complete(.green),
+                        title: "Sucesso ao criar a conta",
+                        subTitle: "Seja bem vindo"
+                    )
+                }, completion: {
+                    Preferences.shared.userLoginComplete = true
+                    AuthenticationService.shared.status = .authenticated
                 }
             )
             .disabled(loading)
@@ -171,6 +190,7 @@ extension StepConfirmPasswordView {
                 state = .loading(false)
                 switch result {
                 case let .success(isSuccess):
+                    Preferences.shared.user = .init(user: user)
                     state = isSuccess ? .success : .error(UseCaseError.networkError.description)
                 case let .failure(error):
                     state = .error(error.description)

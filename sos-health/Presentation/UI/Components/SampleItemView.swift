@@ -10,7 +10,7 @@ import SwiftUI
 struct SampleItemView: View {
 
     @State var title: String
-    @State var subTitle: String
+    @Binding var subTitle: String
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -27,11 +27,5 @@ struct SampleItemView: View {
                 .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
         }
         .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
-    }
-}
-
-struct SampleItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        SampleItemView(title: "Teste", subTitle: "teste")
     }
 }

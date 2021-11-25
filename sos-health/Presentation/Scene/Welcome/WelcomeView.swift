@@ -15,6 +15,8 @@ struct WelcomeView: View {
     @ObservedObject var viewModel: ViewModel
     @State var cancellable: AnyCancellable?
     @State var loading = false
+    @State var showError = false
+    @State var error: UseCaseError?
     @State var sessionProcessingQueue = DispatchQueue(label: "SessionProcessingQueue")
 
     func handleViewModel(from state: ViewModel.State) {
@@ -22,10 +24,11 @@ struct WelcomeView: View {
         case let .loading(isLoading):
             loading = isLoading
         case .success:
-//            coordinator.root(\.)
-            break
+            Preferences.shared.userLoginComplete = true
+            AuthenticationService.shared.status = .authenticated
         case let .error(error):
-            print(error)
+            showError = true
+            self.error = error
         case .newUser(let user), .onboardNotCompleted(let user):
             coordinator.route(to: \.onboarding, user)
         default:
@@ -93,9 +96,25 @@ struct WelcomeView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }.frame(minHeight: 0, maxHeight: 50)
         }
-        .toast(isPresenting: $loading, tapToDismiss: false) {
-            AlertToast(type: .loading, title: "Loading...")
-        }.onAppear {
+        .toast(
+            isPresenting: $showError,
+            duration: 5,
+            tapToDismiss: false,
+            alert: {
+                AlertToast(
+                    type: .error(Color.red),
+                    title: error?.title,
+                    subTitle: error?.description
+                )
+            }
+        )
+        .toast(
+            isPresenting: $loading,
+            tapToDismiss: false,
+            alert: {
+                AlertToast(type: .loading, title: "Loading...")
+            }
+        ).onAppear {
             cancellable = viewModel.$state
                 .subscribe(on: sessionProcessingQueue)
                 .receive(on: DispatchQueue.main)

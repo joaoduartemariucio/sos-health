@@ -19,9 +19,24 @@ struct HomeView: View {
         GridItem(.flexible())
     ]
 
+    init() {
+//        self.viewModel = viewModel
+        UIScrollView.appearance().bounces = false
+    }
+
     var body: some View {
-        GeometryReader { _ in
+        GeometryReader { reader in
             ScrollView {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 6)
+                        .foregroundColor(.accentColor)
+                        .frame(
+                            maxWidth: .infinity,
+                            minHeight: reader.size.height * 0.125,
+                            maxHeight: reader.size.height * 0.125,
+                            alignment: .center
+                        ).cornerRadius(0)
+                }
                 VStack(spacing: 24) {
                     Text("Contatos")
                         .foregroundColor(Color.accentColor)
@@ -45,15 +60,9 @@ struct HomeView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
                     LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(1 ... 6, id: \.self) { item in
-                            Text("\(item)")
-                                .font(.largeTitle)
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity, minHeight: 100)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .foregroundColor(.orange)
-                                )
+                        ForEach(EmergencyAction.allCases, id: \.self) { item in
+                            EmergencyCardView(name: item.title, image: item.icon, color: item.color)
+                                .frame(minWidth: reader.size.width / 3 - (28 * 2), minHeight: reader.size.height * 0.125)
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: 216)
@@ -80,9 +89,16 @@ struct HomeView: View {
                         .frame(height: 272)
                         .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 0))
                     }
-                }
+                }.padding(EdgeInsets(top: 24, leading: 0, bottom: 0, trailing: 0))
             }
-        }
+        }.edgesIgnoringSafeArea(.all)
+    }
+}
+
+extension HomeView {
+
+    class ViewModel: ObservableObject {
+        
     }
 }
 

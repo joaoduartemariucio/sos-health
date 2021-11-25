@@ -73,6 +73,7 @@ extension WelcomeView {
                 if !(user.onboardCompleted ?? false) {
                     return .success(false)
                 } else {
+                    Preferences.shared.user = .init(user: user)
                     return .success(true)
                 }
             case let .failure(error):

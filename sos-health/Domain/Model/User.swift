@@ -30,7 +30,7 @@ extension User {
             address: .init(),
             credentials: .init(),
             onboardCompleted: onboardCompleted,
-            firebaseUser: nil
+            firebaseUser: FirebaseAuth.Auth.auth().currentUser
         )
     }
 }

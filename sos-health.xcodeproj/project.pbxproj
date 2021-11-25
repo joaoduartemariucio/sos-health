@@ -15,6 +15,9 @@
 		C4097027274231F9001789F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4097026274231F9001789F8 /* AppDelegate.swift */; };
 		C409702A274233C3001789F8 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4097029274233C3001789F8 /* OnboardingCoordinator.swift */; };
 		C409702E27423562001789F8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C409702D27423562001789F8 /* GoogleService-Info.plist */; };
+		C434E92E274F196C00A50544 /* EmergencyAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C434E92D274F196C00A50544 /* EmergencyAction.swift */; };
+		C434E931274F2B8600A50544 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C434E930274F2B8600A50544 /* MainView.swift */; };
+		C434E933274F323900A50544 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C434E932274F323900A50544 /* HistoryView.swift */; };
 		C44532DC2745D849001D6B38 /* DBServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44532DB2745D849001D6B38 /* DBServiceError.swift */; };
 		C44532DE2745E1D9001D6B38 /* GetUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44532DD2745E1D9001D6B38 /* GetUser.swift */; };
 		C4486D08274683020042BCAE /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = C4486D07274683020042BCAE /* AlertToast */; };
@@ -41,10 +44,12 @@
 		C44F5CD62741BABF00FDFA17 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CD52741BABF00FDFA17 /* HomeView.swift */; };
 		C44F5CEB2741D08E00FDFA17 /* LoginView.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CEA2741D08E00FDFA17 /* LoginView.ViewModel.swift */; };
 		C44F5CED2741DF1500FDFA17 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CEC2741DF1500FDFA17 /* AuthenticationService.swift */; };
-		C44F5CEF2741E2ED00FDFA17 /* HomeView.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CEE2741E2ED00FDFA17 /* HomeView.ViewModel.swift */; };
 		C44F5CF727421A7900FDFA17 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CF627421A7900FDFA17 /* MainCoordinator.swift */; };
 		C44F5CFB2742243800FDFA17 /* Stinsen in Frameworks */ = {isa = PBXBuildFile; productRef = C44F5CFA2742243800FDFA17 /* Stinsen */; };
 		C44F5CFF2742259500FDFA17 /* UnauthenticatedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CFE2742259500FDFA17 /* UnauthenticatedCoordinator.swift */; };
+		C47EC4532750432000BCA75D /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47EC4522750432000BCA75D /* Preferences.swift */; };
+		C47EC455275047A700BCA75D /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47EC454275047A700BCA75D /* Dictionary+Extensions.swift */; };
+		C47EC457275047BD00BCA75D /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47EC456275047BD00BCA75D /* Encodable+Extensions.swift */; };
 		C4B39DAF274D350B00FFCED7 /* ContactCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B39DAE274D350B00FFCED7 /* ContactCardView.swift */; };
 		C4B39DB1274D3B0D00FFCED7 /* EmergencyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B39DB0274D3B0C00FFCED7 /* EmergencyCardView.swift */; };
 		C4B41F73274750CA00429A45 /* FormattedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B41F72274750CA00429A45 /* FormattedTextField.swift */; };
@@ -112,6 +117,9 @@
 		C4097026274231F9001789F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4097029274233C3001789F8 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		C409702D27423562001789F8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C434E92D274F196C00A50544 /* EmergencyAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyAction.swift; sourceTree = "<group>"; };
+		C434E930274F2B8600A50544 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		C434E932274F323900A50544 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		C44532DB2745D849001D6B38 /* DBServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBServiceError.swift; sourceTree = "<group>"; };
 		C44532DD2745E1D9001D6B38 /* GetUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUser.swift; sourceTree = "<group>"; };
 		C4486D092746892A0042BCAE /* UseCaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseError.swift; sourceTree = "<group>"; };
@@ -138,9 +146,11 @@
 		C44F5CD52741BABF00FDFA17 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C44F5CEA2741D08E00FDFA17 /* LoginView.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.ViewModel.swift; sourceTree = "<group>"; };
 		C44F5CEC2741DF1500FDFA17 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
-		C44F5CEE2741E2ED00FDFA17 /* HomeView.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.ViewModel.swift; sourceTree = "<group>"; };
 		C44F5CF627421A7900FDFA17 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		C44F5CFE2742259500FDFA17 /* UnauthenticatedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthenticatedCoordinator.swift; sourceTree = "<group>"; };
+		C47EC4522750432000BCA75D /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		C47EC454275047A700BCA75D /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
+		C47EC456275047BD00BCA75D /* Encodable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
 		C4B39DAE274D350B00FFCED7 /* ContactCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCardView.swift; sourceTree = "<group>"; };
 		C4B39DB0274D3B0C00FFCED7 /* EmergencyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyCardView.swift; sourceTree = "<group>"; };
 		C4B41F72274750CA00429A45 /* FormattedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedTextField.swift; sourceTree = "<group>"; };
@@ -240,6 +250,22 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		C434E92F274F2B7900A50544 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				C434E930274F2B8600A50544 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		C434E934274F324300A50544 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				C434E932274F323900A50544 /* HistoryView.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		C44F5C9B2740441700FDFA17 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,7 +297,6 @@
 		C44F5C9F27406AAB00FDFA17 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C4B41F762747E2CA00429A45 /* Common */,
 				C44F5C9B2740441700FDFA17 /* Components */,
 			);
 			path = UI;
@@ -303,6 +328,7 @@
 				C4F8C38F2742F83300135EC4 /* Address.swift */,
 				C44F5CAE27406FC400FDFA17 /* Credentials.swift */,
 				C4F8C38D2742F7D800135EC4 /* User.swift */,
+				C434E92D274F196C00A50544 /* EmergencyAction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -336,6 +362,8 @@
 		C44F5CA627406E2000FDFA17 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				C4B41F762747E2CA00429A45 /* Common */,
+				C47EC4512750430C00BCA75D /* Preferences */,
 				C44F5CA027406BB600FDFA17 /* System */,
 			);
 			path = Core;
@@ -399,6 +427,8 @@
 		C44F5CAD27406ED500FDFA17 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				C434E934274F324300A50544 /* History */,
+				C434E92F274F2B7900A50544 /* Main */,
 				C4DC275F274C2B2A007D7EB1 /* Contacts */,
 				C4DC2760274C2B56007D7EB1 /* CreateContact */,
 				C4013F772749A71C00454AE7 /* Profile */,
@@ -427,7 +457,6 @@
 			isa = PBXGroup;
 			children = (
 				C44F5CD52741BABF00FDFA17 /* HomeView.swift */,
-				C44F5CEE2741E2ED00FDFA17 /* HomeView.ViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -459,10 +488,20 @@
 			path = Unauthenticated;
 			sourceTree = "<group>";
 		};
+		C47EC4512750430C00BCA75D /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				C47EC4522750432000BCA75D /* Preferences.swift */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
 		C4B41F762747E2CA00429A45 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				C4B41F772747E2D900429A45 /* String+Extensions.swift */,
+				C47EC454275047A700BCA75D /* Dictionary+Extensions.swift */,
+				C47EC456275047BD00BCA75D /* Encodable+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -742,9 +781,12 @@
 				C4F8C38E2742F7D800135EC4 /* User.swift in Sources */,
 				C4486D0A2746892A0042BCAE /* UseCaseError.swift in Sources */,
 				C4097027274231F9001789F8 /* AppDelegate.swift in Sources */,
+				C47EC4532750432000BCA75D /* Preferences.swift in Sources */,
+				C434E933274F323900A50544 /* HistoryView.swift in Sources */,
 				C44F5CD32741AA6E00FDFA17 /* StepDateBirthView.swift in Sources */,
 				C44F5CCF2741A2DF00FDFA17 /* StepConfirmPasswordView.swift in Sources */,
 				C44F5CBD2740735000FDFA17 /* APIServiceError.swift in Sources */,
+				C434E931274F2B8600A50544 /* MainView.swift in Sources */,
 				C4013F7327495C5C00454AE7 /* CreateUser.swift in Sources */,
 				C4F8C3922742F9BF00135EC4 /* UserDBEntity.swift in Sources */,
 				C4F8C3902742F83300135EC4 /* Address.swift in Sources */,
@@ -754,6 +796,7 @@
 				C44F5CEB2741D08E00FDFA17 /* LoginView.ViewModel.swift in Sources */,
 				C44F5CD12741A2F700FDFA17 /* StepConfirmAddressView.swift in Sources */,
 				C44F5CB42740702300FDFA17 /* VerifyLoginCredentials.swift in Sources */,
+				C47EC457275047BD00BCA75D /* Encodable+Extensions.swift in Sources */,
 				C44F5CC527419F8800FDFA17 /* StepNameView.swift in Sources */,
 				C44F5CB92740725000FDFA17 /* LoginDataSource.swift in Sources */,
 				C4013F7627498F7F00454AE7 /* AuthenticatedCoordinator.swift in Sources */,
@@ -763,9 +806,10 @@
 				C4B41F782747E2D900429A45 /* String+Extensions.swift in Sources */,
 				C44F5CC72741A0D600FDFA17 /* StepZipCodeView.swift in Sources */,
 				C4F8C38C2742E8FB00135EC4 /* LoginWithGoogle.swift in Sources */,
+				C47EC455275047A700BCA75D /* Dictionary+Extensions.swift in Sources */,
 				C44F5CB7274071A500FDFA17 /* CredentialsAPIEntity.swift in Sources */,
+				C434E92E274F196C00A50544 /* EmergencyAction.swift in Sources */,
 				C4486D0C274699DA0042BCAE /* NewUser.swift in Sources */,
-				C44F5CEF2741E2ED00FDFA17 /* HomeView.ViewModel.swift in Sources */,
 				C44532DC2745D849001D6B38 /* DBServiceError.swift in Sources */,
 				C44F5CBF274074E000FDFA17 /* LoginRepositoryImpl.swift in Sources */,
 				C4F8C3942742F9F500135EC4 /* AddressDBEntity.swift in Sources */,
@@ -973,6 +1017,7 @@
 				DEVELOPMENT_TEAM = 44V9FMY9WF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "sos-health/Presentation/Resources/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "SOS Health";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1007,6 +1052,7 @@
 				DEVELOPMENT_TEAM = 44V9FMY9WF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "sos-health/Presentation/Resources/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "SOS Health";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

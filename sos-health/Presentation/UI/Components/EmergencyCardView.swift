@@ -26,7 +26,7 @@ struct EmergencyCardView: View {
                     .frame(width: 40, height: 40)
             }
         }
-        .frame(maxWidth: 100, maxHeight: 100, alignment: .leading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(color)
         .cornerRadius(16)
     }

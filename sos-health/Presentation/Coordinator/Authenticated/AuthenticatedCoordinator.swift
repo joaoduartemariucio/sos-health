@@ -22,6 +22,6 @@ final class AuthenticatedCoordinator: NavigationCoordinatable {
 extension AuthenticatedCoordinator {
 
     @ViewBuilder func makeStart() -> some View {
-        HomeView()
+        MainView()
     }
 }

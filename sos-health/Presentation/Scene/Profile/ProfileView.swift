@@ -19,21 +19,32 @@ struct ProfileView: View {
     @State var email: String = ""
     @State var phone: String = ""
     @State var birthDate: String = ""
+    @State var isProfileImage: Bool = false
+    @State var profileImage = UIImage()
+
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+        UIScrollView.appearance().bounces = false
+    }
 
     func handleViewModel(from state: ViewModel.State) {
         switch state {
         case let .updateUserProfile(user):
             fullName = user.fullName ?? ""
-            email = user.credentials?.username ?? ""
             phone = user.phoneNumber ?? ""
             birthDate = user.birthDate ?? ""
+        case let .updateUserEmail(email):
+            self.email = email
+        case let .updateUserPhoto(image):
+            isProfileImage = true
+            profileImage = image
         default:
             break
         }
     }
 
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 6)
@@ -44,28 +55,35 @@ struct ProfileView: View {
                             maxHeight: bounds.size.height * 0.30,
                             alignment: .center
                         ).cornerRadius(0)
-                    Image("avatar")
-                        .resizable()
-                        .frame(width: bounds.size.height * 0.15, height: bounds.size.height * 0.15)
-                        .clipShape(Circle())
+                    if !isProfileImage {
+                        Image("avatar")
+                            .resizable()
+                            .frame(width: bounds.size.height * 0.15, height: bounds.size.height * 0.15)
+                            .clipShape(Circle())
+                    } else {
+                        Image(uiImage: profileImage)
+                            .resizable()
+                            .frame(width: bounds.size.height * 0.15, height: bounds.size.height * 0.15)
+                            .clipShape(Circle())
+                    }
                 }
-                SampleItemView(title: "Nome completo", subTitle: fullName)
-                SampleItemView(title: "E-Mail", subTitle: email)
-                SampleItemView(title: "Telefone", subTitle: phone)
-                SampleItemView(title: "Data de nascimento", subTitle: birthDate)
+                SampleItemView(title: "Nome completo", subTitle: $fullName)
+                SampleItemView(title: "E-Mail", subTitle: $email)
+                SampleItemView(title: "Telefone", subTitle: $phone)
+                SampleItemView(title: "Data de nascimento", subTitle: $birthDate)
                 RoundedRectangleButton(title: "Ver contatos de emergência", backgroundColor: .accentColor, action: {})
                     .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
             }
         }
         .edgesIgnoringSafeArea(.all)
         .onAppear {
-            viewModel.fetchUserInfos()
             cancellable = viewModel.$state
                 .subscribe(on: sessionProcessingQueue)
                 .receive(on: DispatchQueue.main)
                 .sink { state in
                     self.handleViewModel(from: state)
                 }
+            viewModel.loadView()
         }.onDisappear {
             self.cancellable?.cancel()
         }
@@ -78,18 +96,40 @@ extension ProfileView {
         // MARK: - Additional states
 
         enum State {
-            case updateUserProfile(User)
+            case updateUserProfile(UserSession)
+            case updateUserEmail(String)
+            case updateUserPhoto(UIImage)
             case `default`
         }
 
         @Published var state: State = .default
 
-        func fetchUserInfos() {}
-    }
-}
+        func loadView() {
+            fetchUserInfos()
+            fetchProfileEmail()
+            fetchProfileImage()
+        }
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView(viewModel: .init())
+        func fetchUserInfos() {
+            guard let user = Preferences.shared.user else { return }
+            state = .updateUserProfile(user)
+        }
+
+        func fetchProfileEmail() {
+            guard let firebaseUser = Preferences.shared.firebaseUser else { return }
+            state = .updateUserEmail(firebaseUser.email ?? "")
+        }
+
+        func fetchProfileImage() {
+            guard let firebaseUser = Preferences.shared.firebaseUser,
+                  let photoURL = firebaseUser.photoURL else { return }
+            let task = URLSession.shared.dataTask(with: photoURL) { data, _, _ in
+                guard let data = data, let image = UIImage(data: data) else { return }
+                DispatchQueue.main.async {
+                    self.state = .updateUserPhoto(image)
+                }
+            }
+            task.resume()
+        }
     }
 }
