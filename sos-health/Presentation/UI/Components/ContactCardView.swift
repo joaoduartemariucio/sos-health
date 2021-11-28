@@ -32,14 +32,14 @@ struct ContactCardView: View {
                         Image(systemName: "message.fill")
                             .foregroundColor(.white)
                             .frame(width: 28, height: 28)
-                            .background(Color.accentColor)
+                            .background(Color.primary)
                             .clipShape(Circle())
                     }
                     Button(action: {}) {
                         Image(systemName: "phone.fill")
                             .foregroundColor(.white)
                             .frame(width: 28, height: 28)
-                            .background(Color.accentColor)
+                            .background(Color.primary)
                             .clipShape(Circle())
                     }
                 }
@@ -47,6 +47,6 @@ struct ContactCardView: View {
             }.padding()
         }
         .frame(minWidth: 180, maxHeight: 120, alignment: .leading)
-        .background(Color.accentColor.opacity(0.05))
+        .background(Color.primary.opacity(0.05))
     }
 }

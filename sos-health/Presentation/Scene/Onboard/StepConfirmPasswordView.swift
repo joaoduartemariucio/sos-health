@@ -45,10 +45,10 @@ struct StepConfirmPasswordView: View {
             VStack(alignment: .leading, spacing: 36) {
                 HStack {
                     Text("repeat_your_description")
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(Color.primary)
                         .font(.title)
                     Text("text_field_password")
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(Color.primary)
                         .font(.title)
                         .bold()
                 }
@@ -67,7 +67,7 @@ struct StepConfirmPasswordView: View {
                 Group {
                     RoundedRectangleButton(
                         title: "button_next",
-                        backgroundColor: .accentColor,
+                        backgroundColor: .primary,
                         action: {
                             if viewModel.validate(showError: true) {
                                 viewModel.confirmOnboardInfos()

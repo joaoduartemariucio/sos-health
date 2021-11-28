@@ -39,21 +39,21 @@ struct WelcomeView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("welcome_title")
-                .foregroundColor(Color.accentColor)
+                .foregroundColor(Color.primary)
                 .font(.body)
             Text("app_name")
-                .foregroundColor(Color.accentColor)
+                .foregroundColor(Color.primary)
                 .font(.title)
                 .bold()
             Text("welcome_description")
-                .foregroundColor(Color("WelcomeDescription"))
+                .foregroundColor(.welcomeColor)
                 .font(.subheadline)
             Spacer().frame(maxHeight: 46)
             HStack(spacing: 20) {
                 RoundedRectangleButton(
                     title: "button_create_account",
-                    backgroundColor: Color.accentColor.opacity(0.10),
-                    foregroundColor: Color.accentColor,
+                    backgroundColor: Color.primary.opacity(0.10),
+                    foregroundColor: Color.primary,
                     action: {
                         let user = User(uid: nil, onboardCompleted: false)
                         coordinator.route(to: \.onboarding, user)
@@ -61,7 +61,7 @@ struct WelcomeView: View {
                 )
                 RoundedRectangleButton(
                     title: "button_login",
-                    backgroundColor: Color.accentColor,
+                    backgroundColor: Color.primary,
                     action: {
                         coordinator.route(to: \.login)
                     }
@@ -70,7 +70,7 @@ struct WelcomeView: View {
             Spacer().frame(maxHeight: 36)
             Text("welcome_option")
                 .frame(maxWidth: .infinity, alignment: .center)
-                .foregroundColor(Color.accentColor)
+                .foregroundColor(Color.primary)
                 .font(.subheadline)
             Spacer().frame(maxHeight: 36)
             HStack(alignment: .center, spacing: 25) {
@@ -78,7 +78,7 @@ struct WelcomeView: View {
                     Image("facebook")
                         .resizable()
                         .renderingMode(.template)
-                        .colorMultiply(.accentColor)
+                        .colorMultiply(.primary)
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
                 }
@@ -89,7 +89,7 @@ struct WelcomeView: View {
                     Image("google")
                         .resizable()
                         .renderingMode(.template)
-                        .colorMultiply(.accentColor)
+                        .colorMultiply(.primary)
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
                 }

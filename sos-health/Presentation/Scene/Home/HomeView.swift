@@ -58,7 +58,7 @@ struct HomeView: View {
             VStack {
                 ZStack {
                     Rectangle()
-                        .foregroundColor(.accentColor)
+                        .foregroundColor(.primary)
                         .frame(
                             maxWidth: .infinity,
                             minHeight: reader.size.height * 0.14,
@@ -90,7 +90,7 @@ struct HomeView: View {
                 ScrollView {
                     VStack(spacing: 24) {
                         Text("Contatos")
-                            .foregroundColor(Color.accentColor)
+                            .foregroundColor(Color.primary)
                             .font(.headline)
                             .bold()
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -105,7 +105,7 @@ struct HomeView: View {
                             .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 0))
                         }
                         Text("Solicitações de emergência")
-                            .foregroundColor(Color.accentColor)
+                            .foregroundColor(Color.primary)
                             .font(.headline)
                             .bold()
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -119,7 +119,7 @@ struct HomeView: View {
                         .frame(maxWidth: .infinity, maxHeight: 216)
                         .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
                         Text("Unidades de atendimento próximas")
-                            .foregroundColor(Color.accentColor)
+                            .foregroundColor(Color.primary)
                             .font(.headline)
                             .bold()
                             .frame(maxWidth: .infinity, alignment: .leading)

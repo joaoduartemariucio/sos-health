@@ -19,10 +19,10 @@ struct StepZipCodeView: View {
             VStack(alignment: .leading, spacing: 36) {
                 HStack {
                     Text("your_description")
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(Color.primary)
                         .font(.title)
                     Text("text_field_zip_code")
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(Color.primary)
                         .font(.title)
                         .bold()
                 }
@@ -40,7 +40,7 @@ struct StepZipCodeView: View {
                 Group {
                     RoundedRectangleButton(
                         title: "button_next",
-                        backgroundColor: .accentColor,
+                        backgroundColor: .primary,
                         action: {
                             if viewModel.validate() {
                                 error = false

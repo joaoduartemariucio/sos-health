@@ -29,3 +29,23 @@ struct SampleItemView: View {
         .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
     }
 }
+
+struct SampleItemStaticView: View {
+
+    @State var title: String
+    @State var subTitle: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .foregroundColor(.black)
+                .font(.callout)
+                .bold()
+                .opacity(0.5)
+            Text(subTitle)
+                .foregroundColor(.black)
+                .font(.callout)
+                .bold()
+        }
+    }
+}

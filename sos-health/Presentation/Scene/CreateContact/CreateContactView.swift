@@ -13,22 +13,24 @@ struct CreateContactView: View {
 
     @EnvironmentObject private var coordinator: OnboardingCoordinator.Router
     @ObservedObject var viewModel: ViewModel
+
     @State var errorName = false
     @State var errorEmail = false
     @State var errorPhoneNumber = false
+    @State var cancellable: AnyCancellable?
+    @State var sessionProcessingQueue = DispatchQueue(label: "CreateContactViewQueue")
+
+    func handleViewModel(from state: ViewModel.State) {
+        switch state {
+        case let .loading(isLoading): break
+        default:
+            break
+        }
+    }
 
     var body: some View {
         GeometryReader { _ in
             VStack(alignment: .leading, spacing: 36) {
-                HStack {
-                    Text("Novo")
-                        .foregroundColor(Color.accentColor)
-                        .font(.title)
-                    Text("contato")
-                        .foregroundColor(Color.accentColor)
-                        .font(.title)
-                        .bold()
-                }
                 VStack(spacing: 8) {
                     TextField("text_field_name_place_holder", text: $viewModel.name)
                         .underlineTextField()
@@ -69,11 +71,24 @@ struct CreateContactView: View {
                 Toggle("Notificar contato em emergências", isOn: $viewModel.notify)
                 RoundedRectangleButton(
                     title: "Salvar",
-                    backgroundColor: .accentColor,
+                    backgroundColor: .primary,
                     action: {}
                 ).frame(maxWidth: .infinity, alignment: .trailing)
             }
-        }.padding(28)
+        }
+        .navigationBarTitle("Novo Contato")
+        .navigationBarTitleDisplayMode(.large)
+        .padding(28)
+        .onAppear {
+            cancellable = viewModel.$state
+                .subscribe(on: sessionProcessingQueue)
+                .receive(on: DispatchQueue.main)
+                .sink { state in
+                    self.handleViewModel(from: state)
+                }
+        }.onDisappear {
+            self.cancellable?.cancel()
+        }
     }
 }
 
@@ -81,10 +96,22 @@ extension CreateContactView {
 
     class ViewModel: ObservableObject {
 
+        // MARK: Additional states
+
+        enum State {
+            case loading(Bool)
+            case invalidName
+            case invalidEmail
+            case invalidPhoneNumber
+            case `default`
+        }
+
         // MARK: Proprieters
 
-        var cancellable: AnyCancellable?
+        var subscriptions = Set<AnyCancellable>()
+        var contact: Contact
 
+        @Published var state: State = .default
         @Published var name: String = ""
         @Published var email: String = ""
         @Published var phoneNumber: String = ""
@@ -92,20 +119,44 @@ extension CreateContactView {
 
         // MARK: Initializers
 
-        init() {
-//
-//            cancellable = $email.sink { [weak self] _ in
-//                _ = self?.validate()
-//            }
+        init(contact: Contact) {
+            self.contact = contact
+            configureDataPipeline()
         }
 
         deinit {
+            subscriptions.forEach { $0.cancel() }
             print("Deinit CreateContactView")
-            cancellable?.cancel()
         }
 
-//        func validate() -> Bool {
-//
-//        }
+        func configureDataPipeline() {
+            $name
+                .sink { [weak self] in
+                    guard let self = self else { return }
+                    self.contact.name = $0
+                }
+                .store(in: &subscriptions)
+
+            $email
+                .sink { [weak self] in
+                    guard let self = self else { return }
+                    self.contact.email = $0
+                }
+                .store(in: &subscriptions)
+
+            $phoneNumber
+                .sink { [weak self] in
+                    guard let self = self else { return }
+                    self.contact.phoneNumber = $0
+                }
+                .store(in: &subscriptions)
+
+            $notify
+                .sink { [weak self] in
+                    guard let self = self else { return }
+                    self.contact.notify = $0
+                }
+                .store(in: &subscriptions)
+        }
     }
 }

@@ -18,10 +18,10 @@ struct StepConfirmAddressView: View {
             VStack(alignment: .leading, spacing: 36) {
                 HStack {
                     Text("confirm_description")
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(Color.primary)
                         .font(.title)
                     Text("address_description")
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(Color.primary)
                         .font(.title)
                         .bold()
                 }
@@ -43,7 +43,7 @@ struct StepConfirmAddressView: View {
                 Group {
                     RoundedRectangleButton(
                         title: "button_next",
-                        backgroundColor: .accentColor,
+                        backgroundColor: .primary,
                         action: {
                             coordinator.route(to: \.password, viewModel.user)
                         }
@@ -58,14 +58,6 @@ struct StepConfirmAddressView: View {
 extension StepConfirmAddressView {
 
     class ViewModel: ObservableObject {
-
-        // MARK: - Additional states
-
-        enum State {
-            case loading(Bool)
-            case invalidEmail
-            case `default`
-        }
 
         // MARK: Proprieters
 

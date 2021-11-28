@@ -20,10 +20,10 @@ struct StepPhoneNumberView: View {
             VStack(alignment: .leading, spacing: 36) {
                 HStack {
                     Text("your_description")
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(Color.primary)
                         .font(.title)
                     Text("text_field_phone")
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(Color.primary)
                         .font(.title)
                         .bold()
                 }
@@ -45,7 +45,7 @@ struct StepPhoneNumberView: View {
                 Group {
                     RoundedRectangleButton(
                         title: "button_next",
-                        backgroundColor: .accentColor,
+                        backgroundColor: .primary,
                         action: {
                             if viewModel.validate() {
                                 error = false

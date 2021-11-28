@@ -25,6 +25,7 @@ struct ProfileView: View {
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
         UIScrollView.appearance().bounces = false
+        UINavigationBar.appearance().isHidden = true
     }
 
     func handleViewModel(from state: ViewModel.State) {
@@ -48,7 +49,7 @@ struct ProfileView: View {
             VStack(spacing: 20) {
                 ZStack {
                     Rectangle()
-                        .foregroundColor(.accentColor)
+                        .foregroundColor(.primary)
                         .frame(
                             maxWidth: .infinity,
                             minHeight: bounds.size.height * 0.30,
@@ -73,7 +74,7 @@ struct ProfileView: View {
                 SampleItemView(title: "Data de nascimento", subTitle: $birthDate)
                 RoundedRectangleButton(
                     title: "Ver contatos de emergência",
-                    backgroundColor: .accentColor,
+                    backgroundColor: .primary,
                     action: {
                         coordinator.route(to: \.contacts)
                     }

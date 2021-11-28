@@ -18,11 +18,11 @@ struct LoginView: View {
         GeometryReader { _ in
             VStack(alignment: .leading, spacing: 24) {
                 Text("app_name")
-                    .foregroundColor(Color.accentColor)
+                    .foregroundColor(Color.primary)
                     .font(.title)
                     .bold()
                 Text("login_description")
-                    .foregroundColor(Color("WelcomeDescription"))
+                    .foregroundColor(.welcomeColor)
                     .font(.subheadline)
                 TextField("text_field_email_place_holder", text: $email).underlineTextField()
                 TextField("text_field_password_place_holder", text: $password).underlineTextField()
@@ -36,7 +36,7 @@ struct LoginView: View {
                 Group {
                     RoundedRectangleButton(
                         title: "button_login",
-                        backgroundColor: .accentColor,
+                        backgroundColor: .primary,
                         action: { viewModel.login(email: email, password: password) }
                     ).frame(maxWidth: 226)
                 }.frame(maxWidth: .infinity, alignment: .center)

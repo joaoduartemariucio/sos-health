@@ -13,7 +13,8 @@ final class ProfileCoordinator: NavigationCoordinatable {
     let stack = NavigationStack(initial: \ProfileCoordinator.start)
 
     @Root var start = makeStart
-    @Route(.push) var contacts = makeContacts
+    @Route(.modal) var contacts = makeContacts
+    @Route(.push) var createContact = makeCreateContact
 
     deinit {
         print("Deinit ProfileCoordinator")
@@ -27,6 +28,10 @@ extension ProfileCoordinator {
     }
 
     @ViewBuilder func makeContacts() -> some View {
-        ContactsView()
+        ContactsView(viewModel: .init())
+    }
+
+    @ViewBuilder func makeCreateContact() -> some View {
+        CreateContactView(viewModel: .init(contact: .init()))
     }
 }

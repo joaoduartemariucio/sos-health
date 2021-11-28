@@ -24,24 +24,3 @@ final class AuthenticatedCoordinator: TabCoordinatable {
         print("Deinit UnauthenticatedCoordinator")
     }
 }
-
-extension AuthenticatedCoordinator {
-
-    func makeHome() -> HomeCoordinator {
-        return HomeCoordinator()
-    }
-
-    @ViewBuilder func makeHomeTab(isActive: Bool) -> some View {
-        Image(systemName: "house" + (isActive ? ".fill" : ""))
-        Text("Home")
-    }
-
-    func makeProfile() -> ProfileCoordinator {
-        return ProfileCoordinator()
-    }
-
-    @ViewBuilder func makeProfileTab(isActive: Bool) -> some View {
-        Image(systemName: "person.fill")
-        Text("Perfil")
-    }
-}
