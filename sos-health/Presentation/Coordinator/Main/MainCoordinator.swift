@@ -14,6 +14,7 @@ final class MainCoordinator: NavigationCoordinatable {
 
     @Root var unauthenticated = makeUnauthenticated
     @Root var authenticated = makeAuthenticated
+    @Route(.push) var contacts = makeContacts
 
     @State var cancellable: AnyCancellable?
     @State var quee = DispatchQueue(label: "MainCoordinatorQueue")
@@ -52,5 +53,9 @@ extension MainCoordinator {
 
     func makeAuthenticated() -> AuthenticatedCoordinator {
         return AuthenticatedCoordinator()
+    }
+
+    @ViewBuilder func makeContacts() -> some View {
+        ContactsView()
     }
 }

@@ -31,9 +31,3 @@ struct EmergencyCardView: View {
         .cornerRadius(16)
     }
 }
-
-struct EmergencyCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmergencyCardView(name: "Socorro", image: "help", color: .red)
-    }
-}

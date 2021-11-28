@@ -9,12 +9,6 @@ import Combine
 import iPhoneNumberField
 import SwiftUI
 
-struct CreateContactView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateContactView(viewModel: .init())
-    }
-}
-
 struct CreateContactView: View {
 
     @EnvironmentObject private var coordinator: OnboardingCoordinator.Router

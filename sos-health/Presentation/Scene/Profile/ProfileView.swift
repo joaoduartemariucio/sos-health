@@ -12,9 +12,9 @@ struct ProfileView: View {
 
     @State var bounds = UIScreen.main.bounds
     @ObservedObject var viewModel: ViewModel
-//    @EnvironmentObject private var coordinator: OnboardingCoordinator.Router
+    @EnvironmentObject private var coordinator: ProfileCoordinator.Router
     @State var cancellable: AnyCancellable?
-    @State var sessionProcessingQueue = DispatchQueue(label: "SessionProcessingQueue")
+    @State var sessionProcessingQueue = DispatchQueue(label: "ProfileViewQueue")
     @State var fullName: String = ""
     @State var email: String = ""
     @State var phone: String = ""
@@ -47,7 +47,7 @@ struct ProfileView: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 6)
+                    Rectangle()
                         .foregroundColor(.accentColor)
                         .frame(
                             maxWidth: .infinity,
@@ -71,8 +71,14 @@ struct ProfileView: View {
                 SampleItemView(title: "E-Mail", subTitle: $email)
                 SampleItemView(title: "Telefone", subTitle: $phone)
                 SampleItemView(title: "Data de nascimento", subTitle: $birthDate)
-                RoundedRectangleButton(title: "Ver contatos de emergência", backgroundColor: .accentColor, action: {})
-                    .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
+                RoundedRectangleButton(
+                    title: "Ver contatos de emergência",
+                    backgroundColor: .accentColor,
+                    action: {
+                        coordinator.route(to: \.contacts)
+                    }
+                )
+                .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
             }
         }
         .edgesIgnoringSafeArea(.all)

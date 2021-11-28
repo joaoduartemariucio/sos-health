@@ -12,7 +12,7 @@ struct MainView: View {
 
     var body: some View {
         TabView {
-            HomeView()
+            HomeView(viewModel: .init())
                 .tabItem {
                     Image(systemName: "house")
                     Text("Home")
@@ -28,11 +28,5 @@ struct MainView: View {
                     Text("Perfil")
                 }
         }
-    }
-}
-
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
     }
 }

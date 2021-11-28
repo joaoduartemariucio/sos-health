@@ -8,11 +8,17 @@
 import Stinsen
 import SwiftUI
 
-final class AuthenticatedCoordinator: NavigationCoordinatable {
+final class AuthenticatedCoordinator: TabCoordinatable {
 
-    let stack = NavigationStack(initial: \AuthenticatedCoordinator.start)
+    var child = TabChild(
+        startingItems: [
+            \AuthenticatedCoordinator.home,
+            \AuthenticatedCoordinator.profile
+        ]
+    )
 
-    @Root var start = makeStart
+    @Route(tabItem: makeHomeTab) var home = makeHome
+    @Route(tabItem: makeProfileTab) var profile = makeProfile
 
     deinit {
         print("Deinit UnauthenticatedCoordinator")
@@ -21,7 +27,21 @@ final class AuthenticatedCoordinator: NavigationCoordinatable {
 
 extension AuthenticatedCoordinator {
 
-    @ViewBuilder func makeStart() -> some View {
-        MainView()
+    func makeHome() -> HomeCoordinator {
+        return HomeCoordinator()
+    }
+
+    @ViewBuilder func makeHomeTab(isActive: Bool) -> some View {
+        Image(systemName: "house" + (isActive ? ".fill" : ""))
+        Text("Home")
+    }
+
+    func makeProfile() -> ProfileCoordinator {
+        return ProfileCoordinator()
+    }
+
+    @ViewBuilder func makeProfileTab(isActive: Bool) -> some View {
+        Image(systemName: "person.fill")
+        Text("Perfil")
     }
 }

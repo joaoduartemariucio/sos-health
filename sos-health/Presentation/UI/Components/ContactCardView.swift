@@ -29,15 +29,17 @@ struct ContactCardView: View {
                 Spacer()
                 HStack(spacing: 8) {
                     Button(action: {}) {
-                        Image("avatar")
-                            .resizable()
-                            .frame(width: 25, height: 25)
+                        Image(systemName: "message.fill")
+                            .foregroundColor(.white)
+                            .frame(width: 28, height: 28)
+                            .background(Color.accentColor)
                             .clipShape(Circle())
                     }
                     Button(action: {}) {
-                        Image("avatar")
-                            .resizable()
-                            .frame(width: 25, height: 25)
+                        Image(systemName: "phone.fill")
+                            .foregroundColor(.white)
+                            .frame(width: 28, height: 28)
+                            .background(Color.accentColor)
                             .clipShape(Circle())
                     }
                 }
@@ -46,12 +48,5 @@ struct ContactCardView: View {
         }
         .frame(minWidth: 180, maxHeight: 120, alignment: .leading)
         .background(Color.accentColor.opacity(0.05))
-    }
-}
-
-struct ContactCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContactCardView(name: "Carlos Manoel", phoneNumber: "(14) 99145-9179")
-            .frame(width: 180)
     }
 }

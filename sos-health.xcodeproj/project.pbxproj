@@ -41,7 +41,6 @@
 		C44F5CCF2741A2DF00FDFA17 /* StepConfirmPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CCE2741A2DF00FDFA17 /* StepConfirmPasswordView.swift */; };
 		C44F5CD12741A2F700FDFA17 /* StepConfirmAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CD02741A2F700FDFA17 /* StepConfirmAddressView.swift */; };
 		C44F5CD32741AA6E00FDFA17 /* StepDateBirthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CD22741AA6E00FDFA17 /* StepDateBirthView.swift */; };
-		C44F5CD62741BABF00FDFA17 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CD52741BABF00FDFA17 /* HomeView.swift */; };
 		C44F5CEB2741D08E00FDFA17 /* LoginView.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CEA2741D08E00FDFA17 /* LoginView.ViewModel.swift */; };
 		C44F5CED2741DF1500FDFA17 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CEC2741DF1500FDFA17 /* AuthenticationService.swift */; };
 		C44F5CF727421A7900FDFA17 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CF627421A7900FDFA17 /* MainCoordinator.swift */; };
@@ -50,6 +49,10 @@
 		C47EC4532750432000BCA75D /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47EC4522750432000BCA75D /* Preferences.swift */; };
 		C47EC455275047A700BCA75D /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47EC454275047A700BCA75D /* Dictionary+Extensions.swift */; };
 		C47EC457275047BD00BCA75D /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47EC456275047BD00BCA75D /* Encodable+Extensions.swift */; };
+		C47EC459275057E900BCA75D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CD52741BABF00FDFA17 /* HomeView.swift */; };
+		C47EC45C27505CFF00BCA75D /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47EC45B27505CFF00BCA75D /* View+Extensions.swift */; };
+		C47EC45F2750786800BCA75D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47EC45E2750786800BCA75D /* HomeCoordinator.swift */; };
+		C47EC462275079B900BCA75D /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47EC461275079B900BCA75D /* ProfileCoordinator.swift */; };
 		C4B39DAF274D350B00FFCED7 /* ContactCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B39DAE274D350B00FFCED7 /* ContactCardView.swift */; };
 		C4B39DB1274D3B0D00FFCED7 /* EmergencyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B39DB0274D3B0C00FFCED7 /* EmergencyCardView.swift */; };
 		C4B41F73274750CA00429A45 /* FormattedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B41F72274750CA00429A45 /* FormattedTextField.swift */; };
@@ -151,6 +154,9 @@
 		C47EC4522750432000BCA75D /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		C47EC454275047A700BCA75D /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		C47EC456275047BD00BCA75D /* Encodable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
+		C47EC45B27505CFF00BCA75D /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		C47EC45E2750786800BCA75D /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		C47EC461275079B900BCA75D /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		C4B39DAE274D350B00FFCED7 /* ContactCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCardView.swift; sourceTree = "<group>"; };
 		C4B39DB0274D3B0C00FFCED7 /* EmergencyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyCardView.swift; sourceTree = "<group>"; };
 		C4B41F72274750CA00429A45 /* FormattedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedTextField.swift; sourceTree = "<group>"; };
@@ -229,6 +235,8 @@
 		C4013F7427498F6A00454AE7 /* Authenticated */ = {
 			isa = PBXGroup;
 			children = (
+				C47EC460275079A000BCA75D /* Profile */,
+				C47EC45D2750785600BCA75D /* Home */,
 				C4013F7527498F7F00454AE7 /* AuthenticatedCoordinator.swift */,
 			);
 			path = Authenticated;
@@ -297,6 +305,7 @@
 		C44F5C9F27406AAB00FDFA17 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C47EC45A27505CEC00BCA75D /* Common */,
 				C44F5C9B2740441700FDFA17 /* Components */,
 			);
 			path = UI;
@@ -494,6 +503,30 @@
 				C47EC4522750432000BCA75D /* Preferences.swift */,
 			);
 			path = Preferences;
+			sourceTree = "<group>";
+		};
+		C47EC45A27505CEC00BCA75D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C47EC45B27505CFF00BCA75D /* View+Extensions.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		C47EC45D2750785600BCA75D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C47EC45E2750786800BCA75D /* HomeCoordinator.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		C47EC460275079A000BCA75D /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				C47EC461275079B900BCA75D /* ProfileCoordinator.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		C4B41F762747E2CA00429A45 /* Common */ = {
@@ -774,6 +807,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C47EC459275057E900BCA75D /* HomeView.swift in Sources */,
 				C44F5CC327419CB200FDFA17 /* StepEmailView.swift in Sources */,
 				C44F5C9D2740444200FDFA17 /* RoundedRectangleButton.swift in Sources */,
 				C4FC718F273C055B00EA9D76 /* SceneDelegate.swift in Sources */,
@@ -786,6 +820,7 @@
 				C44F5CD32741AA6E00FDFA17 /* StepDateBirthView.swift in Sources */,
 				C44F5CCF2741A2DF00FDFA17 /* StepConfirmPasswordView.swift in Sources */,
 				C44F5CBD2740735000FDFA17 /* APIServiceError.swift in Sources */,
+				C47EC462275079B900BCA75D /* ProfileCoordinator.swift in Sources */,
 				C434E931274F2B8600A50544 /* MainView.swift in Sources */,
 				C4013F7327495C5C00454AE7 /* CreateUser.swift in Sources */,
 				C4F8C3922742F9BF00135EC4 /* UserDBEntity.swift in Sources */,
@@ -795,6 +830,7 @@
 				C44532DE2745E1D9001D6B38 /* GetUser.swift in Sources */,
 				C44F5CEB2741D08E00FDFA17 /* LoginView.ViewModel.swift in Sources */,
 				C44F5CD12741A2F700FDFA17 /* StepConfirmAddressView.swift in Sources */,
+				C47EC45C27505CFF00BCA75D /* View+Extensions.swift in Sources */,
 				C44F5CB42740702300FDFA17 /* VerifyLoginCredentials.swift in Sources */,
 				C47EC457275047BD00BCA75D /* Encodable+Extensions.swift in Sources */,
 				C44F5CC527419F8800FDFA17 /* StepNameView.swift in Sources */,
@@ -805,6 +841,7 @@
 				C44F5CED2741DF1500FDFA17 /* AuthenticationService.swift in Sources */,
 				C4B41F782747E2D900429A45 /* String+Extensions.swift in Sources */,
 				C44F5CC72741A0D600FDFA17 /* StepZipCodeView.swift in Sources */,
+				C47EC45F2750786800BCA75D /* HomeCoordinator.swift in Sources */,
 				C4F8C38C2742E8FB00135EC4 /* LoginWithGoogle.swift in Sources */,
 				C47EC455275047A700BCA75D /* Dictionary+Extensions.swift in Sources */,
 				C44F5CB7274071A500FDFA17 /* CredentialsAPIEntity.swift in Sources */,
@@ -821,7 +858,6 @@
 				C44F5CBB274072FA00FDFA17 /* LoginAPIImpl.swift in Sources */,
 				C44F5CB127406FD800FDFA17 /* LoginRepository.swift in Sources */,
 				C44F5CAF27406FC400FDFA17 /* Credentials.swift in Sources */,
-				C44F5CD62741BABF00FDFA17 /* HomeView.swift in Sources */,
 				C4013F792749A73200454AE7 /* ProfileView.swift in Sources */,
 				C44F5CFF2742259500FDFA17 /* UnauthenticatedCoordinator.swift in Sources */,
 				C4F8C3962742FA7F00135EC4 /* LoginDBImpl.swift in Sources */,

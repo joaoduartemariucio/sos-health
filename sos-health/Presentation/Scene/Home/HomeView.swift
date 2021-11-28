@@ -5,9 +5,12 @@
 //  Created by João Vitor Duarte Mariucio on 14/11/21.
 //
 
+import Combine
 import SwiftUI
 
 struct HomeView: View {
+
+    // MARK: Properties
 
     let rows = [
         GridItem(.flexible())
@@ -19,91 +22,181 @@ struct HomeView: View {
         GridItem(.flexible())
     ]
 
-    init() {
-//        self.viewModel = viewModel
+    @ObservedObject var viewModel: ViewModel
+    @EnvironmentObject private var coordinator: HomeCoordinator.Router
+    @State var cancellable: AnyCancellable?
+    @State var sessionProcessingQueue = DispatchQueue(label: "HomeViewQueue")
+    @State var fullName: String = ""
+    @State var isProfileImage: Bool = false
+    @State var profileImage = UIImage()
+
+    // MARK: Initializers
+
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
         UIScrollView.appearance().bounces = false
     }
 
+    // MARK: Methods
+
+    func handleViewModel(from state: ViewModel.State) {
+        switch state {
+        case let .updateUserName(name):
+            fullName = name
+        case let .updateUserPhoto(image):
+            isProfileImage = true
+            profileImage = image
+        default:
+            break
+        }
+    }
+
+    // MARK: Body view
+
     var body: some View {
         GeometryReader { reader in
-            ScrollView {
+            VStack {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 6)
+                    Rectangle()
                         .foregroundColor(.accentColor)
                         .frame(
                             maxWidth: .infinity,
-                            minHeight: reader.size.height * 0.125,
-                            maxHeight: reader.size.height * 0.125,
+                            minHeight: reader.size.height * 0.14,
+                            maxHeight: reader.size.height * 0.14,
                             alignment: .center
                         ).cornerRadius(0)
+                    Text("Bem vindo, \(fullName)")
+                        .foregroundColor(Color.white)
+                        .font(.headline)
+                        .bold()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(EdgeInsets(top: reader.size.height * 0.125 / 2, leading: 28, bottom: 0, trailing: 28))
+                    HStack {
+                        if !isProfileImage {
+                            Image("avatar")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .clipShape(Circle())
+                        } else {
+                            Image(uiImage: profileImage)
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .clipShape(Circle())
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding(EdgeInsets(top: reader.size.height * 0.11 / 2, leading: 0, bottom: 0, trailing: 28))
                 }
-                VStack(spacing: 24) {
-                    Text("Contatos")
-                        .foregroundColor(Color.accentColor)
-                        .font(.headline)
-                        .bold()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
-                    ScrollView(.horizontal) {
-                        LazyHGrid(rows: rows, alignment: .center) {
-                            ForEach(1 ... 10, id: \.self) { item in
-                                ContactCardView(name: "name \(item)", phoneNumber: "phone \(item)")
+                ScrollView {
+                    VStack(spacing: 24) {
+                        Text("Contatos")
+                            .foregroundColor(Color.accentColor)
+                            .font(.headline)
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
+                        ScrollView(.horizontal) {
+                            LazyHGrid(rows: rows, alignment: .center) {
+                                ForEach(1 ... 10, id: \.self) { item in
+                                    ContactCardView(name: "name \(item)", phoneNumber: "phone \(item)")
+                                }
+                            }
+                            .frame(height: 120)
+                            .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 0))
+                        }
+                        Text("Solicitações de emergência")
+                            .foregroundColor(Color.accentColor)
+                            .font(.headline)
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
+                        LazyVGrid(columns: columns, spacing: 10) {
+                            ForEach(EmergencyAction.allCases, id: \.self) { item in
+                                EmergencyCardView(name: item.title, image: item.icon, color: item.color)
+                                    .frame(minWidth: reader.size.width / 3 - (28 * 2), minHeight: reader.size.height * 0.125)
                             }
                         }
-                        .frame(height: 120)
-                        .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 0))
-                    }
-                    Text("Solicitações de emergência")
-                        .foregroundColor(Color.accentColor)
-                        .font(.headline)
-                        .bold()
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(maxWidth: .infinity, maxHeight: 216)
                         .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
-                    LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(EmergencyAction.allCases, id: \.self) { item in
-                            EmergencyCardView(name: item.title, image: item.icon, color: item.color)
-                                .frame(minWidth: reader.size.width / 3 - (28 * 2), minHeight: reader.size.height * 0.125)
-                        }
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 216)
-                    .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
-                    Text("Unidades de atendimento próximas")
-                        .foregroundColor(Color.accentColor)
-                        .font(.headline)
-                        .bold()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
-                    ScrollView(.horizontal) {
-                        LazyHGrid(rows: rows, alignment: .center) {
-                            ForEach(1 ... 50, id: \.self) { item in
-                                Text("\(item)")
-                                    .font(.largeTitle)
-                                    .frame(minWidth: 200, maxHeight: .infinity)
-                                    .foregroundColor(.white)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(.orange)
-                                    )
+                        Text("Unidades de atendimento próximas")
+                            .foregroundColor(Color.accentColor)
+                            .font(.headline)
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
+                        ScrollView(.horizontal) {
+                            LazyHGrid(rows: rows, alignment: .center) {
+                                ForEach(1 ... 50, id: \.self) { item in
+                                    Text("\(item)")
+                                        .font(.largeTitle)
+                                        .frame(minWidth: 200, maxHeight: .infinity)
+                                        .foregroundColor(.white)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 5)
+                                                .foregroundColor(.orange)
+                                        )
+                                }
                             }
+                            .frame(height: 272)
+                            .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 0))
                         }
-                        .frame(height: 272)
-                        .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 0))
-                    }
-                }.padding(EdgeInsets(top: 24, leading: 0, bottom: 0, trailing: 0))
+                    }.padding(EdgeInsets(top: 24, leading: 0, bottom: 0, trailing: 0))
+                }
             }
-        }.edgesIgnoringSafeArea(.all)
+        }
+        .edgesIgnoringSafeArea(.top)
+        .onAppear {
+            cancellable = viewModel.$state
+                .subscribe(on: sessionProcessingQueue)
+                .receive(on: DispatchQueue.main)
+                .sink { state in
+                    self.handleViewModel(from: state)
+                }
+            viewModel.loadView()
+        }.onDisappear {
+            self.cancellable?.cancel()
+        }
     }
 }
 
 extension HomeView {
 
     class ViewModel: ObservableObject {
-        
-    }
-}
+        // MARK: - Additional states
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
+        enum State {
+            case updateUserName(String)
+            case updateUserPhoto(UIImage)
+            case `default`
+        }
+
+        @Published var state: State = .default
+
+        func loadView() {
+            fetchUserName()
+            fetchProfileImage()
+        }
+
+        func fetchUserName() {
+            guard let user = Preferences.shared.user else { return }
+            let fullName = user.fullName
+            var components = fullName?.components(separatedBy: " ")
+            if !(components?.isEmpty ?? true) {
+                let firstName = components?.removeFirst()
+                state = .updateUserName(firstName ?? "")
+            }
+        }
+
+        func fetchProfileImage() {
+            guard let firebaseUser = Preferences.shared.firebaseUser,
+                  let photoURL = firebaseUser.photoURL else { return }
+            let task = URLSession.shared.dataTask(with: photoURL) { data, _, _ in
+                guard let data = data, let image = UIImage(data: data) else { return }
+                DispatchQueue.main.async {
+                    self.state = .updateUserPhoto(image)
+                }
+            }
+            task.resume()
+        }
     }
 }
