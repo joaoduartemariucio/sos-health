@@ -66,7 +66,6 @@
 		C47EC45C27505CFF00BCA75D /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47EC45B27505CFF00BCA75D /* View+Extensions.swift */; };
 		C47EC45F2750786800BCA75D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47EC45E2750786800BCA75D /* HomeCoordinator.swift */; };
 		C47EC462275079B900BCA75D /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47EC461275079B900BCA75D /* ProfileCoordinator.swift */; };
-		C48AE203275525CF000F3FC0 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C48AE202275525CF000F3FC0 /* GoogleSignIn */; };
 		C4B39DAF274D350B00FFCED7 /* ContactCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B39DAE274D350B00FFCED7 /* ContactCardView.swift */; };
 		C4B39DB1274D3B0D00FFCED7 /* EmergencyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B39DB0274D3B0C00FFCED7 /* EmergencyCardView.swift */; };
 		C4B41F73274750CA00429A45 /* FormattedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B41F72274750CA00429A45 /* FormattedTextField.swift */; };
@@ -205,7 +204,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C48AE203275525CF000F3FC0 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,7 +679,6 @@
 			);
 			name = "sos-health";
 			packageProductDependencies = (
-				C48AE202275525CF000F3FC0 /* GoogleSignIn */,
 			);
 			productName = "sos-health";
 			productReference = C4FC718B273C055B00EA9D76 /* sos-health.app */;
@@ -757,11 +754,6 @@
 			);
 			mainGroup = C4FC7182273C055B00EA9D76;
 			packageReferences = (
-				C48AE1FE27552490000F3FC0 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
-				C48AE1FF275524C9000F3FC0 /* XCRemoteSwiftPackageReference "stinsen" */,
-				C48AE200275524F0000F3FC0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				C48AE201275525CF000F3FC0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				C48AE20727552888000F3FC0 /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = C4FC718C273C055B00EA9D76 /* Products */;
 			projectDirPath = "";
@@ -1279,57 +1271,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		C48AE1FE27552490000F3FC0 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.6.1;
-			};
-		};
-		C48AE1FF275524C9000F3FC0 /* XCRemoteSwiftPackageReference "stinsen" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/rundfunk47/stinsen";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-		C48AE200275524F0000F3FC0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
-		C48AE201275525CF000F3FC0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
-		C48AE20727552888000F3FC0 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elai950/AlertToast";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		C48AE202275525CF000F3FC0 /* GoogleSignIn */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C48AE201275525CF000F3FC0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
-			productName = GoogleSignIn;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C4FC7183273C055B00EA9D76 /* Project object */;
 }
