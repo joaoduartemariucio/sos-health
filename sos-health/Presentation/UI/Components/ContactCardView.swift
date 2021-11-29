@@ -28,14 +28,24 @@ struct ContactCardView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
                 HStack(spacing: 8) {
-                    Button(action: {}) {
+                    Button(action: {
+                        let tel = "imessage://"
+                        let formattedString = tel + phoneNumber.removeAllNonNumeric()
+                        guard let url = URL(string: formattedString) else { return }
+                        UIApplication.shared.open(url)
+                    }) {
                         Image(systemName: "message.fill")
                             .foregroundColor(.white)
                             .frame(width: 28, height: 28)
                             .background(Color.primary)
                             .clipShape(Circle())
                     }
-                    Button(action: {}) {
+                    Button(action: {
+                        let tel = "tel://"
+                        let formattedString = tel + phoneNumber.removeAllNonNumeric()
+                        guard let url = URL(string: formattedString) else { return }
+                        UIApplication.shared.open(url)
+                    }) {
                         Image(systemName: "phone.fill")
                             .foregroundColor(.white)
                             .frame(width: 28, height: 28)

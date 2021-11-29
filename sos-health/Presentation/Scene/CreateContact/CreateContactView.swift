@@ -5,27 +5,49 @@
 //  Created by João Vitor Duarte Mariucio on 22/11/21.
 //
 
+import AlertToast
 import Combine
 import iPhoneNumberField
 import SwiftUI
 
 struct CreateContactView: View {
 
-    @EnvironmentObject private var coordinator: OnboardingCoordinator.Router
+    @EnvironmentObject private var coordinator: ProfileCoordinator.Router
     @ObservedObject var viewModel: ViewModel
 
+    @State var isLoading = false
     @State var errorName = false
     @State var errorEmail = false
     @State var errorPhoneNumber = false
+    @State var errorSave = false
+    @State var successSave = false
+
     @State var cancellable: AnyCancellable?
     @State var sessionProcessingQueue = DispatchQueue(label: "CreateContactViewQueue")
 
     func handleViewModel(from state: ViewModel.State) {
         switch state {
-        case let .loading(isLoading): break
+        case let .loading(isLoading):
+            self.isLoading = isLoading
+        case .invalidName:
+            errorName = true
+        case .invalidEmail:
+            errorEmail = true
+        case .invalidPhoneNumber:
+            errorPhoneNumber = true
+        case .saveError:
+            errorSave = true
+        case .saveSuccess:
+            successSave = true
         default:
             break
         }
+    }
+
+    func resetErrors() {
+        errorName = false
+        errorEmail = false
+        errorPhoneNumber = false
     }
 
     var body: some View {
@@ -72,7 +94,10 @@ struct CreateContactView: View {
                 RoundedRectangleButton(
                     title: "Salvar",
                     backgroundColor: .primary,
-                    action: {}
+                    action: {
+                        resetErrors()
+                        viewModel.createContact()
+                    }
                 ).frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
@@ -89,6 +114,41 @@ struct CreateContactView: View {
         }.onDisappear {
             self.cancellable?.cancel()
         }
+        .toast(
+            isPresenting: $isLoading,
+            tapToDismiss: false,
+            alert: {
+                AlertToast(type: .loading, title: "Loading...")
+            }
+        )
+        .toast(
+            isPresenting: $errorSave,
+            duration: 5,
+            tapToDismiss: false,
+            alert: {
+                AlertToast(
+                    type: .error(Color.red),
+                    title: "Falha",
+                    subTitle: "Algo deu errado, mas você pode tentar novamente assim que quiser"
+                )
+            }, completion: {
+                coordinator.pop()
+            }
+        )
+        .toast(
+            isPresenting: $successSave,
+            duration: 5,
+            tapToDismiss: false,
+            alert: {
+                AlertToast(
+                    type: .complete(.green),
+                    title: "Sucesso",
+                    subTitle: "Você verá esse contato na primeira tela do app"
+                )
+            }, completion: {
+                coordinator.pop()
+            }
+        )
     }
 }
 
@@ -103,11 +163,13 @@ extension CreateContactView {
             case invalidName
             case invalidEmail
             case invalidPhoneNumber
+            case saveError
+            case saveSuccess
             case `default`
         }
 
         // MARK: Proprieters
-
+        var createContactUseCase = CreateContactUseCase(repo: ContactRepositoryImpl(dataSource: ContactDBImpl()))
         var subscriptions = Set<AnyCancellable>()
         var contact: Contact
 
@@ -157,6 +219,41 @@ extension CreateContactView {
                     self.contact.notify = $0
                 }
                 .store(in: &subscriptions)
+        }
+
+        func createContact() {
+            state = .loading(true)
+            if name.isEmpty {
+                state = .loading(false)
+                state = .invalidName
+                return
+            }
+
+            if email.isEmpty, !email.isValidEmail {
+                state = .loading(false)
+                state = .invalidEmail
+                return
+            }
+
+            if phoneNumber.isEmpty, !phoneNumber.isValidPhoneNumber {
+                state = .loading(false)
+                state = .invalidPhoneNumber
+                return
+            } else {
+                contact.phoneNumber = phoneNumber.removeAllNonNumeric()
+            }
+
+            guard let uid = Preferences.shared.firebaseUser?.uid else {
+                state = .saveError
+                state = .loading(false)
+                return
+            }
+
+            Task {
+                let result = await createContactUseCase.execute(uid: uid, contact: contact)
+                state = result ? .saveSuccess : .saveError
+                state = .loading(false)
+            }
         }
     }
 }

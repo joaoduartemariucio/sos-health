@@ -5,6 +5,7 @@
 //  Created by João Vitor Duarte Mariucio on 22/11/21.
 //
 
+import AlertToast
 import Combine
 import SwiftUI
 
@@ -21,6 +22,7 @@ struct ContactsView: View {
     @State var sessionProcessingQueue = DispatchQueue(label: "ContactsViewQueue")
     @State var contacts = [Contact]()
     @State var isEmptyContacts: Bool = false
+    @State var isLoading: Bool = false
 
     // MARK: Initializers
 
@@ -32,9 +34,11 @@ struct ContactsView: View {
 
     func handleViewModel(from state: ViewModel.State) {
         switch state {
-        case let .loading(isLoading): break
+        case let .loading(isLoading):
+            self.isLoading = isLoading
         case let .updateContacts(contacts):
-            self.contacts = contacts
+            self.contacts = contacts ?? [Contact]()
+            self.isEmptyContacts = contacts == nil || contacts?.count == 0
         default:
             break
         }
@@ -58,8 +62,10 @@ struct ContactsView: View {
                         ForEach(contacts, id: \.self) { item in
                             SampleItemStaticView(
                                 title: item.name,
-                                subTitle: item.phoneNumber
-                            ).padding()
+                                subTitle: item.phoneNumber.format(with: "(XX) XXXXX-XXXX")
+                            )
+                            .padding()
+                            .listRowSeparator(.hidden)
                         }
                     }
                     .listStyle(.plain)
@@ -103,6 +109,13 @@ struct ContactsView: View {
         }.onDisappear {
             self.cancellable?.cancel()
         }
+        .toast(
+            isPresenting: $isLoading,
+            tapToDismiss: false,
+            alert: {
+                AlertToast(type: .loading, title: "Loading...")
+            }
+        )
     }
 }
 
@@ -114,17 +127,27 @@ extension ContactsView {
 
         enum State {
             case loading(Bool)
-            case updateContacts([Contact])
-            case emptyContacts(Bool)
+            case updateContacts([Contact]?)
             case `default`
         }
 
         // MARK: Properties
 
+        var getContactsUseCase = GetContactsUseCase(repo: ContactRepositoryImpl(dataSource: ContactDBImpl()))
         @Published var state: State = .default
 
         // MARK: Methods
 
-        func fetchContacts() {}
+        func fetchContacts() {
+            guard let uid = Preferences.shared.firebaseUser?.uid else { return }
+            state = .loading(true)
+            Task {
+                let contacts = await getContactsUseCase.execute(uid: uid)
+                DispatchQueue.main.async { [weak self] in
+                    self?.state = .updateContacts(contacts)
+                    self?.state = .loading(false)
+                }
+            }
+        }
     }
 }

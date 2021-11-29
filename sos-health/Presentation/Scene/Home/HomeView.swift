@@ -30,6 +30,10 @@ struct HomeView: View {
     @State var isProfileImage: Bool = false
     @State var profileImage = UIImage()
 
+    @State var contacts = [Contact]()
+    @State var careUnits = [CareUnits]()
+    @State var emptyContacts: Bool = true
+
     // MARK: Initializers
 
     init(viewModel: ViewModel) {
@@ -46,6 +50,9 @@ struct HomeView: View {
         case let .updateUserPhoto(image):
             isProfileImage = true
             profileImage = image
+        case let .updateUserContacts(contacts):
+            self.contacts = contacts ?? [Contact]()
+            emptyContacts = contacts == nil || contacts?.isEmpty == true
         default:
             break
         }
@@ -89,20 +96,22 @@ struct HomeView: View {
                 }
                 ScrollView {
                     VStack(spacing: 24) {
-                        Text("Contatos")
-                            .foregroundColor(Color.primary)
-                            .font(.headline)
-                            .bold()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
-                        ScrollView(.horizontal) {
-                            LazyHGrid(rows: rows, alignment: .center) {
-                                ForEach(1 ... 10, id: \.self) { item in
-                                    ContactCardView(name: "name \(item)", phoneNumber: "phone \(item)")
+                        if !emptyContacts {
+                            Text("Contatos")
+                                .foregroundColor(Color.primary)
+                                .font(.headline)
+                                .bold()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                LazyHGrid(rows: rows, alignment: .center) {
+                                    ForEach(contacts, id: \.self) { item in
+                                        ContactCardView(name: item.name, phoneNumber: item.phoneNumber.format(with: "(XX) XXXXX-XXXX"))
+                                    }
                                 }
+                                .frame(height: 120)
+                                .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 0))
                             }
-                            .frame(height: 120)
-                            .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 0))
                         }
                         Text("Solicitações de emergência")
                             .foregroundColor(Color.primary)
@@ -124,20 +133,19 @@ struct HomeView: View {
                             .bold()
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
-                        ScrollView(.horizontal) {
+                        ScrollView(.horizontal, showsIndicators: false) {
                             LazyHGrid(rows: rows, alignment: .center) {
-                                ForEach(1 ... 50, id: \.self) { item in
-                                    Text("\(item)")
-                                        .font(.largeTitle)
-                                        .frame(minWidth: 200, maxHeight: .infinity)
-                                        .foregroundColor(.white)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 5)
-                                                .foregroundColor(.orange)
-                                        )
+                                ForEach(careUnits, id: \.self) { item in
+                                    EmergencyCareUnitView(
+                                        image: UIImage(),
+                                        name: item.name,
+                                        address: item.address,
+                                        distance: item.distance
+                                    )
+                                    .frame(minWidth: 200, maxHeight: .infinity) 
                                 }
                             }
-                            .frame(height: 272)
+                            .frame(height: 300)
                             .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 0))
                         }
                     }.padding(EdgeInsets(top: 24, leading: 0, bottom: 0, trailing: 0))
@@ -167,14 +175,18 @@ extension HomeView {
         enum State {
             case updateUserName(String)
             case updateUserPhoto(UIImage)
+            case updateUserContacts([Contact]?)
             case `default`
         }
 
         @Published var state: State = .default
 
+        let getContactsUseCase = GetContactsUseCase(repo: ContactRepositoryImpl(dataSource: ContactDBImpl()))
+
         func loadView() {
             fetchUserName()
             fetchProfileImage()
+            fetchContacts()
         }
 
         func fetchUserName() {
@@ -184,6 +196,14 @@ extension HomeView {
             if !(components?.isEmpty ?? true) {
                 let firstName = components?.removeFirst()
                 state = .updateUserName(firstName ?? "")
+            }
+        }
+
+        func fetchContacts() {
+            guard let uid = Preferences.shared.firebaseUser?.uid else { return }
+            Task {
+                let contacts = await getContactsUseCase.execute(uid: uid)
+                self.state = .updateUserContacts(contacts)
             }
         }
 

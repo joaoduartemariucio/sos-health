@@ -46,6 +46,8 @@ struct SampleItemStaticView: View {
                 .foregroundColor(.black)
                 .font(.callout)
                 .bold()
+            Divider()
+                .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 0))
         }
     }
 }

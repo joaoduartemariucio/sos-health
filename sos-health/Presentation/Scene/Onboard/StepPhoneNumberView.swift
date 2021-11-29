@@ -84,9 +84,8 @@ extension StepPhoneNumberView {
         }
 
         func validate() -> Bool {
-            let phoneNumber = phone.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
-            user.phoneNumber = phoneNumber
-            return phoneNumber.count == 11
+            user.phoneNumber = phone.removeAllNonNumeric()
+            return phone.isValidPhoneNumber
         }
     }
 }
