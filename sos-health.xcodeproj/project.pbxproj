@@ -42,6 +42,8 @@
 		C44F5CED2741DF1500FDFA17 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CEC2741DF1500FDFA17 /* AuthenticationService.swift */; };
 		C44F5CF727421A7900FDFA17 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CF627421A7900FDFA17 /* MainCoordinator.swift */; };
 		C44F5CFF2742259500FDFA17 /* UnauthenticatedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44F5CFE2742259500FDFA17 /* UnauthenticatedCoordinator.swift */; };
+		C46A982227558EE900C87659 /* HistoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A982127558EE900C87659 /* HistoryCardView.swift */; };
+		C46A98252755928300C87659 /* HistoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A98242755928300C87659 /* HistoryCoordinator.swift */; };
 		C46B6768275315FF00A9DA63 /* AuthenticatedCoordinator+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46B6767275315FF00A9DA63 /* AuthenticatedCoordinator+Factory.swift */; };
 		C46B676A27531B9100A9DA63 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46B676927531B9100A9DA63 /* HeaderView.swift */; };
 		C46B676C2753298500A9DA63 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46B676B2753298500A9DA63 /* Contact.swift */; };
@@ -101,6 +103,15 @@
 		C4B41F73274750CA00429A45 /* FormattedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B41F72274750CA00429A45 /* FormattedTextField.swift */; };
 		C4B41F752747E1B600429A45 /* SecureInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B41F742747E1B600429A45 /* SecureInputView.swift */; };
 		C4B41F782747E2D900429A45 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B41F772747E2D900429A45 /* String+Extensions.swift */; };
+		C4DB97F52755E3E9002921D5 /* CareUnitsDBEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB97F42755E3E9002921D5 /* CareUnitsDBEntity.swift */; };
+		C4DB97F72755E543002921D5 /* GetEmergencyCareUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB97F62755E543002921D5 /* GetEmergencyCareUnits.swift */; };
+		C4DB97F92755F7DA002921D5 /* RequestEmergencyDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB97F82755F7DA002921D5 /* RequestEmergencyDataSource.swift */; };
+		C4DB97FB2755F830002921D5 /* RequestEmergencyDBImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB97FA2755F830002921D5 /* RequestEmergencyDBImpl.swift */; };
+		C4DB97FD2755F8DF002921D5 /* RequestEmergencyDBEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB97FC2755F8DF002921D5 /* RequestEmergencyDBEntity.swift */; };
+		C4DB97FF2755FA04002921D5 /* RequestEmergencyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB97FE2755FA04002921D5 /* RequestEmergencyRepository.swift */; };
+		C4DB98012755FA13002921D5 /* RequestEmergencyRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB98002755FA13002921D5 /* RequestEmergencyRepositoryImpl.swift */; };
+		C4DB98032755FA92002921D5 /* RequestEmergency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB98022755FA92002921D5 /* RequestEmergency.swift */; };
+		C4DB98052755FF4B002921D5 /* ResultSendEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB98042755FF4B002921D5 /* ResultSendEvent.swift */; };
 		C4DC275E274C1CF5007D7EB1 /* SampleItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DC275D274C1CF5007D7EB1 /* SampleItemView.swift */; };
 		C4DC2762274C2B76007D7EB1 /* CreateContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DC2761274C2B76007D7EB1 /* CreateContactView.swift */; };
 		C4DC2764274C2B90007D7EB1 /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DC2763274C2B90007D7EB1 /* ContactsView.swift */; };
@@ -176,6 +187,8 @@
 		C44F5CEC2741DF1500FDFA17 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		C44F5CF627421A7900FDFA17 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		C44F5CFE2742259500FDFA17 /* UnauthenticatedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthenticatedCoordinator.swift; sourceTree = "<group>"; };
+		C46A982127558EE900C87659 /* HistoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCardView.swift; sourceTree = "<group>"; };
+		C46A98242755928300C87659 /* HistoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCoordinator.swift; sourceTree = "<group>"; };
 		C46B6767275315FF00A9DA63 /* AuthenticatedCoordinator+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthenticatedCoordinator+Factory.swift"; sourceTree = "<group>"; };
 		C46B676927531B9100A9DA63 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		C46B676B2753298500A9DA63 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
@@ -204,6 +217,15 @@
 		C4B41F72274750CA00429A45 /* FormattedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedTextField.swift; sourceTree = "<group>"; };
 		C4B41F742747E1B600429A45 /* SecureInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureInputView.swift; sourceTree = "<group>"; };
 		C4B41F772747E2D900429A45 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		C4DB97F42755E3E9002921D5 /* CareUnitsDBEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareUnitsDBEntity.swift; sourceTree = "<group>"; };
+		C4DB97F62755E543002921D5 /* GetEmergencyCareUnits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEmergencyCareUnits.swift; sourceTree = "<group>"; };
+		C4DB97F82755F7DA002921D5 /* RequestEmergencyDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEmergencyDataSource.swift; sourceTree = "<group>"; };
+		C4DB97FA2755F830002921D5 /* RequestEmergencyDBImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEmergencyDBImpl.swift; sourceTree = "<group>"; };
+		C4DB97FC2755F8DF002921D5 /* RequestEmergencyDBEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEmergencyDBEntity.swift; sourceTree = "<group>"; };
+		C4DB97FE2755FA04002921D5 /* RequestEmergencyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEmergencyRepository.swift; sourceTree = "<group>"; };
+		C4DB98002755FA13002921D5 /* RequestEmergencyRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEmergencyRepositoryImpl.swift; sourceTree = "<group>"; };
+		C4DB98022755FA92002921D5 /* RequestEmergency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEmergency.swift; sourceTree = "<group>"; };
+		C4DB98042755FF4B002921D5 /* ResultSendEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSendEvent.swift; sourceTree = "<group>"; };
 		C4DC275D274C1CF5007D7EB1 /* SampleItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleItemView.swift; sourceTree = "<group>"; };
 		C4DC2761274C2B76007D7EB1 /* CreateContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateContactView.swift; sourceTree = "<group>"; };
 		C4DC2763274C2B90007D7EB1 /* ContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsView.swift; sourceTree = "<group>"; };
@@ -287,8 +309,9 @@
 		C4013F7427498F6A00454AE7 /* Authenticated */ = {
 			isa = PBXGroup;
 			children = (
-				C47EC460275079A000BCA75D /* Profile */,
+				C46A98232755926200C87659 /* History */,
 				C47EC45D2750785600BCA75D /* Home */,
+				C47EC460275079A000BCA75D /* Profile */,
 				C4013F7527498F7F00454AE7 /* AuthenticatedCoordinator.swift */,
 				C46B6767275315FF00A9DA63 /* AuthenticatedCoordinator+Factory.swift */,
 			);
@@ -330,6 +353,7 @@
 				C4B41F742747E1B600429A45 /* SecureInputView.swift */,
 				C4DC275D274C1CF5007D7EB1 /* SampleItemView.swift */,
 				C46B676927531B9100A9DA63 /* HeaderView.swift */,
+				C46A982127558EE900C87659 /* HistoryCardView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -387,6 +411,7 @@
 				C434E92D274F196C00A50544 /* EmergencyAction.swift */,
 				C46B676B2753298500A9DA63 /* Contact.swift */,
 				C46B678727546E9C00A9DA63 /* CareUnits.swift */,
+				C4DB98042755FF4B002921D5 /* ResultSendEvent.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -397,6 +422,7 @@
 				C46B677A2754112400A9DA63 /* ContactRepository.swift */,
 				C46B678927546F5100A9DA63 /* EmergencyCareRepository.swift */,
 				C44F5CB027406FD800FDFA17 /* LoginRepository.swift */,
+				C4DB97FE2755FA04002921D5 /* RequestEmergencyRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -407,6 +433,8 @@
 				C46B677C2754114500A9DA63 /* Contact */,
 				C44F5CB227406FE700FDFA17 /* Login */,
 				C4486D092746892A0042BCAE /* UseCaseError.swift */,
+				C4DB97F62755E543002921D5 /* GetEmergencyCareUnits.swift */,
+				C4DB98022755FA92002921D5 /* RequestEmergency.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -436,6 +464,7 @@
 				C46B677F275411F800A9DA63 /* ContactRepositoryImpl.swift */,
 				C46B678D2754705D00A9DA63 /* EmergencyCareRepositoryImpl.swift */,
 				C44F5CBE274074E000FDFA17 /* LoginRepositoryImpl.swift */,
+				C4DB98002755FA13002921D5 /* RequestEmergencyRepositoryImpl.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -448,6 +477,7 @@
 				C46B67722754099000A9DA63 /* ContactDataSource.swift */,
 				C46B678527546E5600A9DA63 /* EmergencyCareDataSource.swift */,
 				C44F5CB82740725000FDFA17 /* LoginDataSource.swift */,
+				C4DB97F82755F7DA002921D5 /* RequestEmergencyDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -486,6 +516,8 @@
 				C4F8C3912742F9BF00135EC4 /* UserDBEntity.swift */,
 				C4F8C3932742F9F500135EC4 /* AddressDBEntity.swift */,
 				C46B677727540A7500A9DA63 /* ContactDBEntity.swift */,
+				C4DB97F42755E3E9002921D5 /* CareUnitsDBEntity.swift */,
+				C4DB97FC2755F8DF002921D5 /* RequestEmergencyDBEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -553,12 +585,21 @@
 			path = Unauthenticated;
 			sourceTree = "<group>";
 		};
+		C46A98232755926200C87659 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				C46A98242755928300C87659 /* HistoryCoordinator.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		C46B6776275409EA00A9DA63 /* Impl */ = {
 			isa = PBXGroup;
 			children = (
 				C46B6774275409DE00A9DA63 /* ContactDBImpl.swift */,
 				C46B678B27546F9100A9DA63 /* EmergencyCareDBImpl.swift */,
 				C4F8C3952742FA7F00135EC4 /* LoginDBImpl.swift */,
+				C4DB97FA2755F830002921D5 /* RequestEmergencyDBImpl.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -920,12 +961,14 @@
 				C44F5C9D2740444200FDFA17 /* RoundedRectangleButton.swift in Sources */,
 				C4FC718F273C055B00EA9D76 /* SceneDelegate.swift in Sources */,
 				C46B677827540A7500A9DA63 /* ContactDBEntity.swift in Sources */,
+				C4DB97F72755E543002921D5 /* GetEmergencyCareUnits.swift in Sources */,
 				C44F5CCD2741A2C800FDFA17 /* StepPasswordView.swift in Sources */,
 				C4F8C38E2742F7D800135EC4 /* User.swift in Sources */,
 				C4486D0A2746892A0042BCAE /* UseCaseError.swift in Sources */,
 				C4097027274231F9001789F8 /* AppDelegate.swift in Sources */,
 				C47EC4532750432000BCA75D /* Preferences.swift in Sources */,
 				C46B676C2753298500A9DA63 /* Contact.swift in Sources */,
+				C4DB97F92755F7DA002921D5 /* RequestEmergencyDataSource.swift in Sources */,
 				C434E933274F323900A50544 /* HistoryView.swift in Sources */,
 				C46B678C27546F9100A9DA63 /* EmergencyCareDBImpl.swift in Sources */,
 				C46B6780275411F800A9DA63 /* ContactRepositoryImpl.swift in Sources */,
@@ -938,6 +981,7 @@
 				C47EC462275079B900BCA75D /* ProfileCoordinator.swift in Sources */,
 				C4013F7327495C5C00454AE7 /* CreateUser.swift in Sources */,
 				C4F8C3922742F9BF00135EC4 /* UserDBEntity.swift in Sources */,
+				C4DB98012755FA13002921D5 /* RequestEmergencyRepositoryImpl.swift in Sources */,
 				C4F8C3902742F83300135EC4 /* Address.swift in Sources */,
 				C46B6775275409DE00A9DA63 /* ContactDBImpl.swift in Sources */,
 				C4B41F752747E1B600429A45 /* SecureInputView.swift in Sources */,
@@ -947,6 +991,7 @@
 				C44F5CD12741A2F700FDFA17 /* StepConfirmAddressView.swift in Sources */,
 				C47EC45C27505CFF00BCA75D /* View+Extensions.swift in Sources */,
 				C44F5CB42740702300FDFA17 /* VerifyLoginCredentials.swift in Sources */,
+				C46A982227558EE900C87659 /* HistoryCardView.swift in Sources */,
 				C47EC457275047BD00BCA75D /* Encodable+Extensions.swift in Sources */,
 				C46B677E2754115900A9DA63 /* CreateContact.swift in Sources */,
 				C44F5CC527419F8800FDFA17 /* StepNameView.swift in Sources */,
@@ -957,6 +1002,7 @@
 				C44F5CCB2741A2B700FDFA17 /* StepPhoneNumberView.swift in Sources */,
 				C44F5CED2741DF1500FDFA17 /* AuthenticationService.swift in Sources */,
 				C46B6768275315FF00A9DA63 /* AuthenticatedCoordinator+Factory.swift in Sources */,
+				C46A98252755928300C87659 /* HistoryCoordinator.swift in Sources */,
 				C46B677B2754112400A9DA63 /* ContactRepository.swift in Sources */,
 				C4B41F782747E2D900429A45 /* String+Extensions.swift in Sources */,
 				C44F5CC72741A0D600FDFA17 /* StepZipCodeView.swift in Sources */,
@@ -981,15 +1027,21 @@
 				C44F5CB127406FD800FDFA17 /* LoginRepository.swift in Sources */,
 				C46B678A27546F5100A9DA63 /* EmergencyCareRepository.swift in Sources */,
 				C44F5CAF27406FC400FDFA17 /* Credentials.swift in Sources */,
+				C4DB97FD2755F8DF002921D5 /* RequestEmergencyDBEntity.swift in Sources */,
 				C4013F792749A73200454AE7 /* ProfileView.swift in Sources */,
 				C44F5CFF2742259500FDFA17 /* UnauthenticatedCoordinator.swift in Sources */,
+				C4DB98032755FA92002921D5 /* RequestEmergency.swift in Sources */,
 				C4F8C3962742FA7F00135EC4 /* LoginDBImpl.swift in Sources */,
+				C4DB97F52755E3E9002921D5 /* CareUnitsDBEntity.swift in Sources */,
 				C4013F712749594F00454AE7 /* ChangeUserInfo.swift in Sources */,
+				C4DB97FB2755F830002921D5 /* RequestEmergencyDBImpl.swift in Sources */,
+				C4DB97FF2755FA04002921D5 /* RequestEmergencyRepository.swift in Sources */,
 				C4FC71CB273C4A3000EA9D76 /* WelcomeView.ViewModel.swift in Sources */,
 				C4DC2762274C2B76007D7EB1 /* CreateContactView.swift in Sources */,
 				C46B67712753E33100A9DA63 /* Color+Extensions.swift in Sources */,
 				C409702A274233C3001789F8 /* OnboardingCoordinator.swift in Sources */,
 				C4DC2764274C2B90007D7EB1 /* ContactsView.swift in Sources */,
+				C4DB98052755FF4B002921D5 /* ResultSendEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1178,6 +1230,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "sos-health/Presentation/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "SOS Health";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Para melhor te ajudar em situações de emergência";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Para melhor te ajudar em situações de emergência";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1213,6 +1267,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "sos-health/Presentation/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "SOS Health";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Para melhor te ajudar em situações de emergência";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Para melhor te ajudar em situações de emergência";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

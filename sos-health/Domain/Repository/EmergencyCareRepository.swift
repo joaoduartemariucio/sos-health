@@ -8,6 +8,6 @@
 import Foundation
 
 protocol EmergencyCareRepository {
-    func getUnits(zipCode: String) async -> [CareUnits]?
+    func getUnits() async -> [CareUnits]?
 }
 

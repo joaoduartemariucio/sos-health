@@ -9,9 +9,12 @@ import Firebase
 import Foundation
 import GoogleSignIn
 import SwiftUI
+import CoreLocation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    let locManager = CLLocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
@@ -34,6 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
 
+
+        self.locManager.requestWhenInUseAuthorization()
+        self.locManager.requestAlwaysAuthorization()
+        self.locManager.delegate = self
+        self.locManager.startUpdatingLocation()
+
         return true
     }
 
@@ -51,6 +60,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         return GIDSignIn.sharedInstance.handle(url)
+    }
+}
+
+extension AppDelegate: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let lastLocation = locations.last {
+            Preferences.shared.location = lastLocation
+        }
     }
 }
 

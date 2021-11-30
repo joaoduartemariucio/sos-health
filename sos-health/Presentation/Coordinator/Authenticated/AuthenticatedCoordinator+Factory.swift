@@ -19,6 +19,15 @@ extension AuthenticatedCoordinator {
         Text("Home")
     }
 
+    func makeHistory() -> HistoryCoordinator {
+        return HistoryCoordinator()
+    }
+
+    @ViewBuilder func makeHistoryTab(isActive: Bool) -> some View {
+        Image(systemName: "clock.arrow.circlepath")
+        Text("Histórico")
+    }
+
     func makeProfile() -> NavigationViewCoordinator<ProfileCoordinator> {
         return NavigationViewCoordinator(ProfileCoordinator())
     }

@@ -6,14 +6,15 @@
 //
 
 import Foundation
+import Firebase
 
 struct CareUnits: Hashable {
 
     var name: String
-    var distance: String
     var address: String
     var city: String
     var uf: String
     var urlImage: String
     var zipCode: String
+    var coords: Firebase.GeoPoint
 }

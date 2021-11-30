@@ -7,6 +7,7 @@
 
 import Firebase
 import Foundation
+import CoreLocation
 
 class Preferences {
 
@@ -16,6 +17,8 @@ class Preferences {
         get { UserDefaults.standard.bool(forKey: "user_login_complete") }
         set { UserDefaults.standard.set(newValue, forKey: "user_login_complete") }
     }
+
+    var location: CLLocation?
 
     var user: UserSession? {
         get {

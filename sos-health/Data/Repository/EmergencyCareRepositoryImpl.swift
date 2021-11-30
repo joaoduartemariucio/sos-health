@@ -11,7 +11,7 @@ struct EmergencyCareRepositoryImpl: EmergencyCareRepository {
 
     var dataSource: EmergencyCareDataSource
 
-    func getUnits(zipCode: String) async -> [CareUnits]? {
-        return await dataSource.getUnits(zipCode: zipCode)
+    func getUnits() async -> [CareUnits]? {
+        return await dataSource.getUnits()
     }
 }

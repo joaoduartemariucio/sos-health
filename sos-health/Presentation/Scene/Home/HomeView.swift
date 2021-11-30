@@ -7,6 +7,7 @@
 
 import Combine
 import SwiftUI
+import AlertToast
 
 struct HomeView: View {
 
@@ -32,7 +33,11 @@ struct HomeView: View {
 
     @State var contacts = [Contact]()
     @State var careUnits = [CareUnits]()
+
+    @State var emptyCareUnits: Bool = true
     @State var emptyContacts: Bool = true
+    @State var sendEvent: Bool = false
+    @State var lastSendEvent: ResultSendEvent = .init(isSuccess: true, event: .asthma)
 
     // MARK: Initializers
 
@@ -53,6 +58,12 @@ struct HomeView: View {
         case let .updateUserContacts(contacts):
             self.contacts = contacts ?? [Contact]()
             emptyContacts = contacts == nil || contacts?.isEmpty == true
+        case let .updateUserCareUnits(units):
+            self.careUnits = units ?? [CareUnits]()
+            emptyCareUnits = units == nil || units?.isEmpty == true
+        case let .updateSendEvent(result):
+            lastSendEvent = result
+            sendEvent = true
         default:
             break
         }
@@ -121,32 +132,39 @@ struct HomeView: View {
                             .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
                         LazyVGrid(columns: columns, spacing: 10) {
                             ForEach(EmergencyAction.allCases, id: \.self) { item in
-                                EmergencyCardView(name: item.title, image: item.icon, color: item.color)
-                                    .frame(minWidth: reader.size.width / 3 - (28 * 2), minHeight: reader.size.height * 0.125)
+                                EmergencyCardView(
+                                    name: item.title,
+                                    image: item.icon,
+                                    color: item.color,
+                                    clossure: { 
+                                        viewModel.requestEvent(from: item)
+                                    }
+                                ).frame(minWidth: reader.size.width / 3 - (28 * 2), minHeight: reader.size.height * 0.125)
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: 216)
                         .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
-                        Text("Unidades de atendimento próximas")
-                            .foregroundColor(Color.primary)
-                            .font(.headline)
-                            .bold()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            LazyHGrid(rows: rows, alignment: .center) {
-                                ForEach(careUnits, id: \.self) { item in
-                                    EmergencyCareUnitView(
-                                        image: UIImage(),
-                                        name: item.name,
-                                        address: item.address,
-                                        distance: item.distance
-                                    )
-                                    .frame(minWidth: 200, maxHeight: .infinity) 
+                        if !emptyCareUnits {
+                            Text("Unidades de atendimento próximas")
+                                .foregroundColor(Color.primary)
+                                .font(.headline)
+                                .bold()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 28))
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                LazyHGrid(rows: rows, alignment: .center) {
+                                    ForEach(careUnits, id: \.self) { item in
+                                        EmergencyCareUnitView(
+                                            image: item.urlImage,
+                                            name: item.name,
+                                            address: item.address
+//                                            distance: item.distance
+                                        ).frame(minWidth: 200, maxHeight: .infinity)
+                                    }
                                 }
+                                .frame(height: 308)
+                                .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 0))
                             }
-                            .frame(height: 300)
-                            .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 0))
                         }
                     }.padding(EdgeInsets(top: 24, leading: 0, bottom: 0, trailing: 0))
                 }
@@ -163,7 +181,18 @@ struct HomeView: View {
             viewModel.loadView()
         }.onDisappear {
             self.cancellable?.cancel()
-        }
+        }.toast(
+            isPresenting: $sendEvent,
+            duration: 5,
+            tapToDismiss: true,
+            alert: {
+                AlertToast(
+                    type: lastSendEvent.isSuccess ? .complete(.green) : .error(.red),
+                    title: lastSendEvent.event.title,
+                    subTitle: lastSendEvent.isSuccess ? "Enviado com sucesso" : "Falhou, envie novamente"
+                )
+            }
+        )
     }
 }
 
@@ -176,17 +205,22 @@ extension HomeView {
             case updateUserName(String)
             case updateUserPhoto(UIImage)
             case updateUserContacts([Contact]?)
+            case updateUserCareUnits([CareUnits]?)
+            case updateSendEvent(ResultSendEvent)
             case `default`
         }
 
         @Published var state: State = .default
 
         let getContactsUseCase = GetContactsUseCase(repo: ContactRepositoryImpl(dataSource: ContactDBImpl()))
+        let getEmergencyCareUnitsUseCase = GetEmergencyCareUnitsUseCase(repo: EmergencyCareRepositoryImpl(dataSource: EmergencyCareDBImpl()))
+        let requestEmergencyUseCase = RequestEmergencyUseCase(repo: RequestEmergencyRepositoryImpl(dataSource: RequestEmergencyDBImpl()))
 
         func loadView() {
             fetchUserName()
-            fetchProfileImage()
             fetchContacts()
+            fetchCareUnits()
+            fetchProfileImage()
         }
 
         func fetchUserName() {
@@ -199,11 +233,25 @@ extension HomeView {
             }
         }
 
+        func fetchCareUnits() {
+            Task {
+                let result = await getEmergencyCareUnitsUseCase.execute()
+                state = .updateUserCareUnits(result)
+            }
+        }
+
         func fetchContacts() {
             guard let uid = Preferences.shared.firebaseUser?.uid else { return }
             Task {
                 let contacts = await getContactsUseCase.execute(uid: uid)
                 self.state = .updateUserContacts(contacts)
+            }
+        }
+
+        func requestEvent(from event: EmergencyAction) {
+            Task {
+                let result = await requestEmergencyUseCase.execute(event: event)
+                state = .updateSendEvent(.init(isSuccess: result, event: event))
             }
         }
 

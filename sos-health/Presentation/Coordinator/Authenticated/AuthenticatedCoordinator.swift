@@ -13,11 +13,13 @@ final class AuthenticatedCoordinator: TabCoordinatable {
     var child = TabChild(
         startingItems: [
             \AuthenticatedCoordinator.home,
-            \AuthenticatedCoordinator.profile
+             \AuthenticatedCoordinator.history,
+             \AuthenticatedCoordinator.profile
         ]
     )
 
     @Route(tabItem: makeHomeTab) var home = makeHome
+    @Route(tabItem: makeHistoryTab) var history = makeHistory
     @Route(tabItem: makeProfileTab) var profile = makeProfile
 
     deinit {

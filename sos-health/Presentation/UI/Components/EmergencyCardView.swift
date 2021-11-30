@@ -12,6 +12,7 @@ struct EmergencyCardView: View {
     @State var name: String
     @State var image: String
     @State var color: Color
+    @State var clossure: (() -> Void)
 
     var body: some View {
         VStack {
@@ -20,7 +21,7 @@ struct EmergencyCardView: View {
                 .font(.callout)
                 .bold()
                 .frame(maxWidth: .infinity, alignment: .center)
-            Button(action: {}) {
+            Button(action: { clossure() }) {
                 Image(image)
                     .resizable()
                     .frame(width: 40, height: 40)
