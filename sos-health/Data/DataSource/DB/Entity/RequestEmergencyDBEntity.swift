@@ -16,3 +16,14 @@ struct RequestEmergencyDBEntity: Codable {
     var eventDesc: String
     var notified: Bool
 }
+
+struct ModelRequestEmergency: Hashable {
+
+    var uid: String
+    var date: String
+    var eventLat: Double
+    var eventLong: Double
+    var eventDesc: String
+    var notified: Bool
+}
+

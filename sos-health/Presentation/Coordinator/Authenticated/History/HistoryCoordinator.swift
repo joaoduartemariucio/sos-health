@@ -22,6 +22,6 @@ final class HistoryCoordinator: NavigationCoordinatable {
 extension HistoryCoordinator {
 
     @ViewBuilder func makeStart() -> some View {
-        HistoryView()
+        HistoryView(viewModel: .init())
     }
 }

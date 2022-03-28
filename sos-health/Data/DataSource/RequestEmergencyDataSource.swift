@@ -8,5 +8,6 @@
 import Foundation
 
 protocol RequestEmergencyDataSource {
+    func requestedEvents() async -> [RequestEmergencyDBEntity]?
     func requestEvent(event: EmergencyAction) async -> Bool
 }

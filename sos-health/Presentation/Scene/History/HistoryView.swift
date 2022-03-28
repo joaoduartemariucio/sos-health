@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct HistoryView: View {
+
+    @State var events = [ModelRequestEmergency]()
+    @ObservedObject var viewModel: ViewModel
+
     var body: some View {
         GeometryReader { reader in
             VStack {
@@ -28,13 +32,33 @@ struct HistoryView: View {
                         .padding(EdgeInsets(top: reader.size.height * 0.125 / 2, leading: 28, bottom: 0, trailing: 28))
                 }
                 List {
-                    ForEach(1...5, id: \.self) { item in
-                        HistoryCardView()
+                    ForEach(events, id: \.self) { item in
+                        HistoryCardView(event: item)
                             .listRowSeparator(.hidden)
                     }
                 }
                 .listStyle(.plain)
             }
-        }.edgesIgnoringSafeArea(.top)
+        }
+        .edgesIgnoringSafeArea(.top)
+        .onAppear {
+            Task {
+                events = await viewModel.fetchValues().map {
+                    .init(uid: $0.uid, date: $0.date, eventLat: $0.eventLat, eventLong: $0.eventLong, eventDesc: $0.eventDesc, notified: $0.notified)
+                }
+            }
+        }
+    }
+}
+
+extension HistoryView {
+
+    class ViewModel: ObservableObject {
+
+        let repo = RequestEmergencyDBImpl()
+
+        func fetchValues() async -> [RequestEmergencyDBEntity] {
+            return await repo.requestedEvents() ?? [RequestEmergencyDBEntity]()
+        }
     }
 }

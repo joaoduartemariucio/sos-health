@@ -33,7 +33,7 @@ struct ProfileView: View {
         case let .updateUserProfile(user):
             fullName = user.fullName ?? ""
             phone = user.phoneNumber?.format(with: "(XX) XXXXX-XXXX") ?? ""
-            birthDate = user.birthDate ?? "Não informada no cadastro"
+            birthDate = user.birthDate ?? "04/05/2000"
         case let .updateUserEmail(email):
             self.email = email
         case let .updateUserPhoto(image):

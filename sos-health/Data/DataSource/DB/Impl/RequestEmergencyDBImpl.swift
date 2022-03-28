@@ -15,6 +15,24 @@ struct RequestEmergencyDBImpl: RequestEmergencyDataSource {
 
     let db = Firestore.firestore()
 
+    func requestedEvents() async -> [RequestEmergencyDBEntity]? {
+        do {
+            let eventsRef = db.collection("requested_emergency")
+            let uid = Preferences.shared.firebaseUser?.uid ?? ""
+            let snapshots = try await eventsRef.whereField("uid", isEqualTo: uid).getDocuments()
+
+            let eventsDBEntity: [RequestEmergencyDBEntity] = try snapshots.documents.compactMap {
+                let data = $0.data()
+                let event: RequestEmergencyDBEntity = try data.decode()
+                return event
+            }
+
+            return eventsDBEntity
+        } catch {
+            return nil
+        }
+    }
+
     func requestEvent(event: EmergencyAction) async -> Bool {
         do {
             let event = try RequestEmergencyDBEntity(

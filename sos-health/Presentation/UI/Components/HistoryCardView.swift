@@ -6,20 +6,38 @@
 //
 
 import SwiftUI
+import MapKit
+import Combine
+
+struct AnnotationItem: Identifiable {
+    var coordinate: CLLocationCoordinate2D
+    let id = UUID()
+}
 
 struct HistoryCardView: View {
+
+    @State var event: ModelRequestEmergency
+    @State var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 38.898150, longitude: -77.034340),
+        span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.1)
+    )
+
+    @State var annotationItems: [AnnotationItem] = [AnnotationItem]()
+
     var body: some View {
         GeometryReader { _ in
             VStack(spacing: 8) {
-                Text("Pedido de socorro")
+                Text(event.eventDesc)
                     .font(.headline)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                AsyncImage(withURL: "https://firebasestorage.googleapis.com/v0/b/sos-health-app.appspot.com/o/Captura%20de%20Tela%202021-11-29%20a%CC%80s%2020.38.21.png?alt=media&token=63c3941b-9654-4099-8ea9-2d2d0df032fb")
-                    .frame(maxWidth: .infinity, minHeight: 200)
+                Map(coordinateRegion: $region, annotationItems: annotationItems) {
+                    MapPin(coordinate: $0.coordinate)
+                }
+                .frame(maxWidth: .infinity, minHeight: 200)
                 HStack {
                     Spacer()
-                    Text("Data: 21/11/2021")
+                    Text("Data: \(event.date)")
                         .font(.caption)
                         .fixedSize(horizontal: false, vertical: true)
                         .foregroundColor(.gray)
@@ -31,5 +49,9 @@ struct HistoryCardView: View {
         .background(.white)
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .shadow(color: .black.opacity(0.25), radius: 8, x: 0, y: 5)
+        .onAppear {
+            region = .init(center: .init(latitude: event.eventLat, longitude: event.eventLong), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+            annotationItems.append(.init(coordinate: .init(latitude: event.eventLat, longitude: event.eventLong)))
+        }
     }
 }
