@@ -5,7 +5,7 @@
 //  Created by João Vitor Duarte Mariucio on 13/11/21.
 //
 
-import Firebase
+import FirebaseAuth
 import Foundation
 
 struct LoginRepositoryImpl: LoginRepository {
@@ -16,7 +16,7 @@ struct LoginRepositoryImpl: LoginRepository {
         return try await dataSource.checkCredentials(from: credentials)
     }
 
-    func loginWithGoogle(completion: @escaping ((Result<Firebase.User, Error>) -> Void)) {
+    func loginWithGoogle(completion: @escaping ((Result<FirebaseAuth.User, Error>) -> Void)) {
         dataSource.loginWithGoogle(completion: completion)
     }
 

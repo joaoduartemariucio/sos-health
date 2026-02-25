@@ -10,8 +10,8 @@ import Stinsen
 import SwiftUI
 
 final class MainCoordinator: NavigationCoordinatable {
-    var stack: NavigationStack<MainCoordinator>
-
+    var stack: Stinsen.NavigationStack<MainCoordinator>
+    
     @Root var unauthenticated = makeUnauthenticated
     @Root var authenticated = makeAuthenticated
 

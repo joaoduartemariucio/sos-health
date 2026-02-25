@@ -6,13 +6,13 @@
 //
 
 import Combine
-import Firebase
+import FirebaseAuth
 import GoogleSignIn
 import SwiftUI
 
 protocol LoginDataSource {
 
-    func loginWithGoogle(completion: @escaping ((Result<Firebase.User, Error>) -> Void))
+    func loginWithGoogle(completion: @escaping ((Result<FirebaseAuth.User, Error>) -> Void))
 
     func getUser(from uid: String) async throws -> User
     func newUser(from uid: String) async throws -> Bool
@@ -45,5 +45,5 @@ extension LoginDataSource {
         return false
     }
 
-    func loginWithGoogle(completion: @escaping ((Result<Firebase.User, Error>) -> Void)) {}
+    func loginWithGoogle(completion: @escaping ((Result<FirebaseAuth.User, Error>) -> Void)) {}
 }

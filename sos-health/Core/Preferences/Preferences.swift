@@ -5,7 +5,7 @@
 //  Created by João Vitor Duarte Mariucio on 25/11/21.
 //
 
-import Firebase
+import FirebaseAuth
 import Foundation
 import CoreLocation
 
@@ -65,7 +65,7 @@ class Preferences {
         }
     }
 
-    var firebaseUser: Firebase.User? { FirebaseAuth.Auth.auth().currentUser }
+    var firebaseUser: FirebaseAuth.User? { Auth.auth().currentUser }
 }
 
 class ContactSession: NSObject, NSCoding {

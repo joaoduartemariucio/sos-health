@@ -5,7 +5,7 @@
 //  Created by João Vitor Duarte Mariucio on 15/11/21.
 //
 
-import Firebase
+import FirebaseAuth
 import Foundation
 
 struct User {
@@ -17,7 +17,7 @@ struct User {
     var address: Address?
     var credentials: Credentials?
     var onboardCompleted: Bool?
-    var firebaseUser: Firebase.User?
+    var firebaseUser: FirebaseAuth.User?
 }
 
 extension User {
